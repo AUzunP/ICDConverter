@@ -1,16 +1,14 @@
 package main;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
 public class MainFrame extends JFrame{
-	
-	private BottomPane bottomPane;
-	private TopPane topPane;
-	private CustomButton convertButton;
+
+	private static final long serialVersionUID = 1L;
+
+	private MainPane mainPane;
 	
 	private int width;
 	private int height;
@@ -29,22 +27,8 @@ public class MainFrame extends JFrame{
 		setMinimumSize(d);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		//inserting top and bottom panes
-		bottomPane = new BottomPane(width, height);
-		add(bottomPane, BorderLayout.SOUTH);
-		
-		topPane = new TopPane(width, height);
-		add(topPane, BorderLayout.NORTH);
-		
-		//inserting button
-		convertButton = new CustomButton();
-		add(convertButton, BorderLayout.CENTER);
-		
-		convertButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Hello");
-			}
-		});
+		mainPane = new MainPane(width, height);
+		add(mainPane, BorderLayout.CENTER);
 		
 		this.pack();
 		this.setLocationRelativeTo(null);
