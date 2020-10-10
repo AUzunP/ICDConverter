@@ -14,8 +14,10 @@ public class MainFrame extends JFrame{
 	private int height;
 	
 	MainFrame() {
+		
 		super("ICDConverter");
 		
+		setResizable(false);
 		setLayout(new BorderLayout());
 		
 		this.width = 200;
@@ -24,6 +26,7 @@ public class MainFrame extends JFrame{
 		// (x, y)
 		Dimension d = new Dimension(width, height);
 		setSize(d);
+		setPreferredSize(d);
 		setMinimumSize(d);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		

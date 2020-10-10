@@ -1,44 +1,50 @@
 package main;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 public class MainPane extends JPanel{
 	
 	private BottomPane bottomPane;
 	private TopPane topPane;
-	private CustomButton convertButton;
+	private SettingsPane settingsPane;
 	
 	MainPane(int width, int height) {
 		
-		setLayout(new BorderLayout());
-		
-		Dimension d = new Dimension(width, height);
-		this.setPreferredSize(d);
-		this.setBackground(Color.GREEN);
-		
-		//inserting top and bottom panes
-		bottomPane = new BottomPane(width, height);
-		add(bottomPane, BorderLayout.SOUTH);
+		setLayout(new GridBagLayout());
+		setBorder(BorderFactory.createBevelBorder(1));
 		
 		topPane = new TopPane(width, height);
-		add(topPane, BorderLayout.NORTH);
+		bottomPane = new BottomPane(width, height);
+		settingsPane = new SettingsPane(width, height);
 		
-		//inserting button
-		convertButton = new CustomButton();
-		add(convertButton, BorderLayout.CENTER);
+		GridBagConstraints c = new GridBagConstraints();
 		
-		//convertButton action
-		convertButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Hello");
-			}
-		});
+		c.fill = GridBagConstraints.HORIZONTAL;
+		
+		c.anchor = GridBagConstraints.PAGE_START;
+		c.weightx = 0.5;
+		c.gridx = 0;
+		c.gridy = 0;
+		
+		add(settingsPane, c);
+		
+		c.anchor = GridBagConstraints.CENTER;
+		c.weightx = 0.5;
+		c.gridx = 0;
+		c.gridy = 1;
+		
+		add(topPane, c);
+		
+		c.anchor = GridBagConstraints.PAGE_END;
+		c.weightx = 0.5;
+		c.gridx = 0;
+		c.gridy = 2;
+		
+		add(bottomPane, c);
 		
 	}
 	
