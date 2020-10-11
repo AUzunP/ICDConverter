@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 public class MainPane extends JPanel{
 	
+	private static final long serialVersionUID = 1L;
 	private BottomPane bottomPane;
 	private TopPane topPane;
 	private SettingsPane settingsPane;

@@ -12,6 +12,7 @@ import javax.swing.border.EtchedBorder;
 
 public class SettingsPane extends JPanel{
 
+	private static final long serialVersionUID = 1L;
 	private CustomButton settingsButton, dictionaryButton, saveButton;
 	
 	SettingsPane(int width, int height) {
@@ -21,7 +22,7 @@ public class SettingsPane extends JPanel{
 		
 		Dimension d = new Dimension(width, ((int)((double)height*.1)));
 		setPreferredSize(d);
-		setBackground(Color.MAGENTA);
+		setBackground(Color.WHITE);
 		
 		//Buttons
 		//{{
