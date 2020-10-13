@@ -1,4 +1,4 @@
-package main;
+package converter;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -51,6 +51,12 @@ public class ICDDictionary {
 		
 		reader.close();
 		
+	}
+	
+	public void appendList(String codeToAppend) {
+		ICDCode newCode = new ICDCode(codeToAppend);
+		codesList.add(newCode);
+		//add code to text file
 	}
 	
 	public void readList() {

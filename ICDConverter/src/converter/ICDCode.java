@@ -1,4 +1,4 @@
-package main;
+package converter;
 import java.util.ArrayList;
 
 public class ICDCode {
