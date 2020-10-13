@@ -6,20 +6,23 @@ public class ICDCode {
 	private String code;
 	private ArrayList<String> diagnoses;
 	
-	ICDCode(String code, String initialDiagnosis) {
+//	ICDCode(String code, String initialDiagnosis) {
+//		OLD CODE MIGHT USE LATER ON NOT SURE
 		//For user input
-		//TODO
-		//Make it so that the search function is not case sensitive and any added
-		//is added in lower-case. Maybe make use of separate function
-		
-		this.diagnoses = new ArrayList<String>();
-		this.code = code;
-		this.diagnoses.add(initialDiagnosis);
-		
-	}
+//		//TODO
+//		//Make it so that the search function is not case sensitive and any added
+//		//is added in lower-case. Maybe make use of separate function
+//		
+//		this.diagnoses = new ArrayList<String>();
+//		this.code = code;
+//		this.diagnoses.add(initialDiagnosis);
+//		
+//	}
 	
 	ICDCode(String entry) {
 		//For input from codes.txt file
+		entry = entry.toUpperCase();
+		
 		this.diagnoses = new ArrayList<String>();
 		
 		ArrayList<String> diagnosesArray = new ArrayList<String>();
@@ -36,6 +39,8 @@ public class ICDCode {
 	
 	private ArrayList<String> format(String entry) {
 		//Entry should be as follows: I10{Hypertension, HTN, High blood pressure}
+		entry = entry.toUpperCase();
+		
 		ArrayList<String> codes = new ArrayList<String>();
 			
 		//grab ICD code from entry
@@ -66,6 +71,8 @@ public class ICDCode {
 	
 	private String formatCode(String entry) {
 		//Goes through string until it hits { and enters the previous string as ICD code
+		entry = entry.toUpperCase();
+		
 		String code = "";
 		
 		for (int i = 0; i < entry.length(); i++) {
@@ -87,15 +94,17 @@ public class ICDCode {
 		//Determine whether string given is single key or bunch of keys separated by commas
 		//Might just call format function but without {}
 		//Adds given diagnosis to code object
+		diagnosisToAdd = diagnosisToAdd.toUpperCase();
+		
 		this.diagnoses.add(diagnosisToAdd);
 	}
 	
 	public void deleteDiagnosis(String diagnosisToDelete) {
 		//Deletes given diagnosis from code object
-		
+		diagnosisToDelete = diagnosisToDelete.toUpperCase();
 		try {
 			for (int i = 0; i < this.diagnoses.size(); i++) {
-				if (this.diagnoses.get(i) == diagnosisToDelete) {
+				if (this.diagnoses.get(i).equals(diagnosisToDelete)) {
 					System.out.println("Successfully removed " + this.diagnoses.get(i));
 					this.diagnoses.remove(i);
 					return;
@@ -118,17 +127,38 @@ public class ICDCode {
 		
 	}
 	
-	public boolean diagnosisSearch(String diagnosisToSearch) {
+	public String diagnosisSearch(String diagnosisToSearch) {
 		//Searches associated code object for given diagnosis
+		diagnosisToSearch = diagnosisToSearch.toUpperCase();
+		
 		for (int i = 0; i < this.diagnoses.size(); i++) {
 			if (this.diagnoses.get(i).equals(diagnosisToSearch)) {
-				System.out.println(diagnosisToSearch + " exists for the code " + this.code);
-				return true;
+				//System.out.println(diagnosisToSearch + " exists for the code " + this.code);
+				return this.code;
 			}
 		}
 		
 		//System.out.println(diagnosisToSearch + " is not an existing key for the code " + this.code);
-		return false;
+		return null;
+	}
+
+	public String getFormattedCode() {
+		//follows I10{Hypertension, HTN, High blood pressure} format
+		String formattedCode = "";
+		
+		formattedCode += (this.getCode() + "{");
+		
+		for (int i = 0; i < this.diagnoses.size(); i++) {
+			formattedCode += (this.diagnoses.get(i) + ", ");
+		}
+		
+		//removing last comma
+		formattedCode = formattedCode.substring(0, formattedCode.length()-2);
+		formattedCode = (formattedCode + "}");
+		
+		System.out.println(formattedCode);
+		
+		return formattedCode;
 	}
 	
 }
