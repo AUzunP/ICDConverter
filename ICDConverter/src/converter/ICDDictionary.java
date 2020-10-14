@@ -18,7 +18,7 @@ public class ICDDictionary {
 		
 		//Entry should be as follows: I10{Hypertension, HTN, High blood pressure}
 		
-		System.out.println("Populating list...\n");
+		//System.out.println("Populating list...\n");
 		populateList();
 		
 	}
@@ -38,7 +38,7 @@ public class ICDDictionary {
 			textContents += "\n";
 		}
 		
-		System.out.println(textContents);
+		//System.out.println(textContents);
 		
 		reader.close();
 		

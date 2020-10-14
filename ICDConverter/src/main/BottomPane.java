@@ -3,25 +3,30 @@ package main;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
+import javax.swing.plaf.ColorUIResource;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 
 public class BottomPane extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	
-	private CustomButton clearButton;
+	public CustomButton clearButton;
+	public JScrollPane scrollPane;
+	public JTextArea codeField;
 
 	BottomPane(int width, int height){
 		
 		setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 		
 		//set width same size as MainFrame, set height to 40% of height
-		Dimension d = new Dimension(width, ((int)((double)height*.4)));
+		Dimension d = new Dimension(width, ((int)((double)height*.65)));
 		this.setPreferredSize(d);
 		this.setBackground(Color.WHITE);
 		
@@ -30,13 +35,16 @@ public class BottomPane extends JPanel{
 		clearButton = new CustomButton("Clear");
 		this.add(clearButton, BorderLayout.SOUTH);
 		
-		clearButton.addActionListener(new ActionListener() {
+		codeField = new JTextArea();
+		codeField.setEditable(false);
+		
+		scrollPane = new JScrollPane(codeField);
+		
+		UIManager.put("ScrollBar.thumb", new ColorUIResource(Color.WHITE));
+		scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI());
+		scrollPane.getHorizontalScrollBar().setUI(new BasicScrollBarUI());
 
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Clear clicked");
-			}
-			
-		});
+		this.add(scrollPane, BorderLayout.CENTER);
 		
 	}
 	
