@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +21,8 @@ public class MainFrame extends JFrame{
 	
 	private int width;
 	private int height;
+	
+	private JFrame newCodeFrame;
 	
 	public ICDDictionary mainDictionary;
 	
@@ -86,6 +89,16 @@ public class MainFrame extends JFrame{
 		
 		setVisible(true);
 		
+		//toss all this shit into new function
+		//window listener should set parent frame (mainframe) to editable again on newCodeFrame close
+		newCodeFrame = new JFrame("New Code");
+		Dimension newD = new Dimension(100, 200);
+		newCodeFrame.setPreferredSize(newD);
+		newCodeFrame.setResizable(false);
+		newCodeFrame.setLayout(new BorderLayout());
+		newCodeFrame.pack();
+		newCodeFrame.setLocationRelativeTo(null);
+		newCodeFrame.setVisible(false);
 	}
 	
 	public void enterButtonFunction() {
@@ -109,6 +122,7 @@ public class MainFrame extends JFrame{
 				
 			} else {
 				System.out.println("Code does not exist...");
+				newCodeFrame.setVisible(true);
 			}
 			
 		}
