@@ -1,10 +1,10 @@
 package main;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 import javax.swing.AbstractAction;
@@ -15,6 +15,10 @@ import converter.ICDDictionary;
 
 public class MainFrame extends JFrame{
 
+	//TODO
+	//Line 130
+	//Must format entered information from diagnosis and code before submitting into dictionary
+	
 	private static final long serialVersionUID = 1L;
 
 	private MainPane mainPane;
@@ -89,23 +93,71 @@ public class MainFrame extends JFrame{
 		
 		setVisible(true);
 		
-		//toss all this shit into new function
-		//window listener should set parent frame (mainframe) to editable again on newCodeFrame close
+	}
+	
+	private void createNewCodeFrame(String errorTextString) {
+		//new code frame sprung from entering an invalid diagnosis 
+		
 		newCodeFrame = new JFrame("New Code");
-		Dimension newD = new Dimension(100, 200);
+		Dimension newD = new Dimension(200, 250);
 		newCodeFrame.setPreferredSize(newD);
 		newCodeFrame.setResizable(false);
 		newCodeFrame.setLayout(new BorderLayout());
+		newCodeFrame.setUndecorated(true);
 		newCodeFrame.pack();
 		newCodeFrame.setLocationRelativeTo(null);
-		newCodeFrame.setVisible(false);
+		
+		NonexistantCodePane newCodePane = new NonexistantCodePane(100, 200, errorTextString);
+		
+		newCodeFrame.add(newCodePane, BorderLayout.CENTER);
+		
+		//{{Cancel button logic
+		newCodePane.cancelButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Cancel button clicked");
+				//closes newCodeFrame on cancel button click
+				newCodeFrame.dispatchEvent(new WindowEvent(newCodeFrame, WindowEvent.WINDOW_CLOSING));
+				//set parent JFrame to enabled
+				setEnabled(true);
+			}
+			
+		});
+		//}}
+		
+		//{{Add to dictionary button logic
+		newCodePane.addToDictionaryButton.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				String diagnosis = newCodePane.enterDiagnosis.getText();
+				String code = newCodePane.enterCode.getText();
+				
+				System.out.println("Add to dictionary button clicked");
+				System.out.println("Diagnosis: " + diagnosis + "\nCode: " + code);
+				
+				//MUST FORMAT INFORMATION FROM DIAGNOSIS AND CODE BEFORE SUBMITTING TO DICTIONARY
+//				try {
+//					mainDictionary.appendDictionary(diagnosis, true);
+//				} catch (IOException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
+				
+				newCodeFrame.dispatchEvent(new WindowEvent(newCodeFrame, WindowEvent.WINDOW_CLOSING));
+				setEnabled(true);
+			}
+			
+		});
+		//}}
+		
 	}
 	
 	public void enterButtonFunction() {
 		
 		if (!(mainPane.topPane.textField.getText().trim().equals(""))) {
 			//ensures that text field is not an empty string or just white space
-			System.out.println("Enter clicked");
+			//System.out.println("Enter clicked");
 			
 			String enteredDiagnosis = mainPane.topPane.textField.getText();
 			enteredDiagnosis = enteredDiagnosis.toUpperCase();
@@ -121,8 +173,12 @@ public class MainFrame extends JFrame{
 						" --------- " + returnedCode + "\n");
 				
 			} else {
-				System.out.println("Code does not exist...");
+				//System.out.println("Code does not exist...");
+
+				createNewCodeFrame(enteredDiagnosis + " is not associated with an existing code. ");
+				
 				newCodeFrame.setVisible(true);
+				setEnabled(false);
 			}
 			
 		}

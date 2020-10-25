@@ -90,18 +90,19 @@ public class ICDDictionary {
 	
 	public void appendDictionary(String codeToAppend, boolean appendList) throws IOException {
 		//dictionary is the text file that contains all the codes that the program takes from at the start
-		//when populateDictionary() is called
+		//user input is done through this function, appendList should be true when done through user input
 		codeToAppend = codeToAppend.toUpperCase();
 		
+		//only false when clearing and re-populating
 		if (appendList) {
 			appendList(codeToAppend);
 		}
-		
+
+		//add code to text file		
 		FileWriter writer = new FileWriter("codes.txt", true);
 		writer.write(codeToAppend + "\n");
 		writer.close();
 		
-		//add code to text file
 	}
 	
 	private void clearDictionary() throws IOException {
