@@ -6,6 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -29,6 +32,8 @@ public class MainFrame extends JFrame{
 	private int height;
 	
 	private JFrame newCodeFrame;
+	
+	private CustomDialog errorBox;
 	
 	public ICDDictionary mainDictionary;
 	
@@ -138,21 +143,94 @@ public class MainFrame extends JFrame{
 				System.out.println("Add to dictionary button clicked");
 				System.out.println("Diagnosis: " + diagnosis + "\nCode: " + code);
 				
-				//MUST FORMAT INFORMATION FROM DIAGNOSIS AND CODE BEFORE SUBMITTING TO DICTIONARY
-//				try {
-//					mainDictionary.appendDictionary(diagnosis, true);
-//				} catch (IOException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				}
+				if (viableEntry(diagnosis, code)) {
+					formatEntries(diagnosis, code);
+					
+					//MUST FORMAT INFORMATION FROM DIAGNOSIS AND CODE BEFORE SUBMITTING TO DICTIONARY
+//					try {
+//						mainDictionary.appendDictionary(diagnosis, true);
+//					} catch (IOException e1) {
+//						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+//					}
+					
+					newCodeFrame.dispatchEvent(new WindowEvent(newCodeFrame, WindowEvent.WINDOW_CLOSING));
+					setEnabled(true);
+				}
 				
-				newCodeFrame.dispatchEvent(new WindowEvent(newCodeFrame, WindowEvent.WINDOW_CLOSING));
-				setEnabled(true);
 			}
 			
 		});
 		//}}
 		
+	}
+	
+	private boolean viableEntry(String diagnosis, String code) {
+		
+		//Deny conditions:
+		//Empty code or diagnosis text field
+		//First character of code must be a number
+		//...?
+
+		errorBox = new CustomDialog(newCodeFrame, "PLACEHOLDER");
+		errorBox.setLocationRelativeTo(newCodeFrame);
+		
+		errorBox.okButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				newCodeFrame.setEnabled(true);
+				errorBox.setVisible(false);
+			}
+			
+		});
+		
+		if (code.equals("") || diagnosis.equals("")) {
+			newCodeFrame.setEnabled(false);
+			errorBox.changeErrorText("Can't have empty diagnosis or code.");
+			errorBox.setVisible(true);
+			return false;
+		}
+		
+		if (!(Character.isDigit(code.charAt(0)))) {
+			newCodeFrame.setEnabled(false);
+			errorBox.changeErrorText("First character of code must be a number.");
+			errorBox.setVisible(true);
+			return false;
+		}
+		
+		return true;
+	}
+	
+	private String formatEntries(String diagnosis, String code) {
+		
+		String formattedEntry = "";
+		List<String> allDiagnosis = new ArrayList<String>();
+		
+		diagnosis = diagnosis.toUpperCase();
+		code = code.toUpperCase();
+		
+		//separate string by commas into List
+		allDiagnosis = Arrays.asList(diagnosis.split(","));
+		
+		//remove white space from start and end
+		for (int i = 0; i < allDiagnosis.size(); i++) {
+			allDiagnosis.set(i, (allDiagnosis.get(i).trim()));
+		}
+		
+		formattedEntry += code;
+		formattedEntry += "{";
+		
+		for (int i = 0; i < allDiagnosis.size(); i++) {
+			formattedEntry += allDiagnosis.get(i) + ", ";
+		}
+		
+		//remove last comma and white space
+		formattedEntry = formattedEntry.substring(0, (formattedEntry.length()-2));
+		formattedEntry += "}";
+		
+		System.out.println(formattedEntry);
+		
+		return formattedEntry;
 	}
 	
 	public void enterButtonFunction() {
