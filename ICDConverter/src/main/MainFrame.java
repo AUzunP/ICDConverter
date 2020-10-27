@@ -169,7 +169,7 @@ public class MainFrame extends JFrame{
 		
 		//Deny conditions:
 		//Empty code or diagnosis text field
-		//First character of code must be a number
+		//Second character of code must be a number
 		//...?
 
 		errorBox = new CustomDialog(newCodeFrame, "PLACEHOLDER");
@@ -191,9 +191,9 @@ public class MainFrame extends JFrame{
 			return false;
 		}
 		
-		if (!(Character.isDigit(code.charAt(0)))) {
+		if (!(Character.isDigit(code.charAt(1)))) {
 			newCodeFrame.setEnabled(false);
-			errorBox.changeErrorText("First character of code must be a number.");
+			errorBox.changeErrorText("Second character of code must be a number.");
 			errorBox.setVisible(true);
 			return false;
 		}
