@@ -27,7 +27,9 @@ public class ICDDictionary {
 		//Reads all lines in codes.txt and converts them to a format that is then
 		//used to populate the list with codes and the associated diagnoses
 		
-		BufferedReader reader = new BufferedReader(new FileReader("codes.txt"));
+		//THIS HAS TO BE CODES.TXT NOT CODES WHEN EXPORTING INTO .exe
+		//DO THE SAME FOR OTHER FILE WRITERSd
+		BufferedReader reader = new BufferedReader(new FileReader("codes"));
 		
 		String textContents = "";
 		String line;
@@ -99,7 +101,7 @@ public class ICDDictionary {
 		}
 
 		//add code to text file		
-		FileWriter writer = new FileWriter("codes.txt", true);
+		FileWriter writer = new FileWriter("codes", true);
 		writer.write(codeToAppend + "\n");
 		writer.close();
 		
@@ -107,7 +109,7 @@ public class ICDDictionary {
 	
 	private void clearDictionary() throws IOException {
 		//Should be clearing and re-populating dictionary after every code change
-		FileWriter fWriter = new FileWriter("codes.txt", false);
+		FileWriter fWriter = new FileWriter("codes", false);
 		PrintWriter pWriter = new PrintWriter(fWriter, false);
 		pWriter.flush();
 		pWriter.close();
