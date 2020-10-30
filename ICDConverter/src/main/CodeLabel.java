@@ -1,0 +1,76 @@
+package main;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.util.ArrayList;
+
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.plaf.ColorUIResource;
+import javax.swing.plaf.basic.BasicScrollBarUI;
+
+public class CodeLabel extends JPanel{
+	
+	private JLabel codeText;
+	private JTextField allDiagnosis;
+	
+	CodeLabel(String code, ArrayList<String> diagnosis) {
+		//TODO
+		//Kinda messy bro idk, clean this up
+		
+		int codeX = 25;
+		int codeY = 50;
+		
+		int diagX = 200 - codeX;
+		int diagY = codeY;
+		
+		//code size
+		Dimension d = new Dimension(codeX, codeY);
+		
+		codeText = new JLabel(code);
+		
+		codeText.setPreferredSize(d);
+		
+		codeText.setHorizontalAlignment(SwingConstants.CENTER);
+		codeText.setVerticalAlignment(SwingConstants.CENTER);
+		
+		String diagnosisToString = "";
+		
+		for (int i = 0; i < diagnosis.size(); i++) {
+			diagnosisToString += diagnosis.get(i) + ", ";
+		}
+		
+		diagnosisToString = diagnosisToString.substring(0, diagnosisToString.length() - 2);
+		//System.out.println(diagnosisToString);
+		
+		allDiagnosis = new JTextField(diagnosisToString);
+		allDiagnosis.setEditable(false);
+		
+		//diagnosisScrollPane size
+		d = new Dimension(diagX, diagY);
+		
+		JScrollPane diagnosisScrollPane = new JScrollPane(allDiagnosis);
+		
+		diagnosisScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		diagnosisScrollPane.setBorder(BorderFactory.createBevelBorder(1));
+		//change look of scroll bar
+		UIManager.put("ScrollBar.thumb", new ColorUIResource(Color.WHITE));
+		diagnosisScrollPane.getHorizontalScrollBar().setUI(new BasicScrollBarUI());
+		
+		diagnosisScrollPane.setPreferredSize(d);
+		
+		setLayout(new BorderLayout());
+		this.setBorder(BorderFactory.createBevelBorder(1));
+		
+		add(codeText, BorderLayout.CENTER);
+		add(diagnosisScrollPane, BorderLayout.EAST);
+		
+	}
+	
+}

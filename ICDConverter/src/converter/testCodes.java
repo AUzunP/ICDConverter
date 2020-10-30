@@ -9,5 +9,5 @@ public class testCodes {
 		ICDDictionary testDictionary = new ICDDictionary();
 		testDictionary.searchList("coronary artery disease");
 	}
-	
+
 }

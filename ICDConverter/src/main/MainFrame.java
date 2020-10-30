@@ -86,7 +86,7 @@ public class MainFrame extends JFrame{
 		mainPane.bottomPane.clearButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				mainPane.bottomPane.codeField.setText("");
+				mainPane.bottomPane.codeField.removeLabels();
 				System.out.println("Clear clicked");
 			}
 			
@@ -237,7 +237,7 @@ public class MainFrame extends JFrame{
 		
 		if (!(mainPane.topPane.textField.getText().trim().equals(""))) {
 			//ensures that text field is not an empty string or just white space
-			//System.out.println("Enter clicked");
+			System.out.println("Enter clicked");
 			
 			String enteredDiagnosis = mainPane.topPane.textField.getText();
 			enteredDiagnosis = enteredDiagnosis.toUpperCase();
@@ -248,12 +248,14 @@ public class MainFrame extends JFrame{
 				
 				mainPane.topPane.textField.setText("");
 				mainPane.topPane.textField.requestFocus();
-				String currentText = mainPane.bottomPane.codeField.getText();		
-				mainPane.bottomPane.codeField.setText(currentText + enteredDiagnosis + 
-						" --------- " + returnedCode + "\n");
+				
+				System.out.println(mainDictionary.returnDiagnoses(returnedCode));
+				
+				mainPane.bottomPane.codeField.addCodeLabel(returnedCode, 
+						mainDictionary.returnDiagnoses(returnedCode));
 				
 			} else {
-				//System.out.println("Code does not exist...");
+				System.out.println("Code does not exist...");
 
 				createNewCodeFrame(enteredDiagnosis + " is not associated with an existing code. ");
 				

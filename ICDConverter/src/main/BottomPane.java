@@ -19,8 +19,8 @@ public class BottomPane extends JPanel{
 	
 	public CustomButton clearButton;
 	public JScrollPane scrollPane;
-	public JTextArea codeField;
-
+	public MainPanelCodes codeField;
+	
 	BottomPane(int width, int height){
 		
 		setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
@@ -35,8 +35,7 @@ public class BottomPane extends JPanel{
 		clearButton = new CustomButton("Clear");
 		this.add(clearButton, BorderLayout.SOUTH);
 		
-		codeField = new JTextArea();
-		codeField.setEditable(false);
+		codeField = new MainPanelCodes();
 		
 		scrollPane = new JScrollPane(codeField);
 		

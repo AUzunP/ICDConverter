@@ -134,6 +134,12 @@ public class ICDDictionary {
 		clearAndRepopulateDictionary();
 	}
 	
+	public ArrayList<String> returnDiagnoses(String code) {
+		
+		return manipulate(code).returnDiagnosis();
+		
+	}
+	
 	private ICDCode manipulate(String code) {
 		//Grab an ICDCode object to manipulate (add/remove diagnosis, etc.)
 		code = code.toUpperCase();

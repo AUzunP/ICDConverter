@@ -127,6 +127,12 @@ public class ICDCode {
 		
 	}
 	
+	public ArrayList<String> returnDiagnosis() {
+		
+		return this.diagnoses;
+		
+	}
+	
 	public String diagnosisSearch(String diagnosisToSearch) {
 		//Searches associated code object for given diagnosis
 		diagnosisToSearch = diagnosisToSearch.toUpperCase();
