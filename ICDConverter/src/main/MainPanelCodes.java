@@ -3,6 +3,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 public class MainPanelCodes extends JPanel{
@@ -15,6 +16,7 @@ public class MainPanelCodes extends JPanel{
 	MainPanelCodes() {
 		
 		setLayout(new GridBagLayout());
+		setBorder(BorderFactory.createEtchedBorder(1));
 		
 	}
 	

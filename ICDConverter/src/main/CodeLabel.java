@@ -24,7 +24,7 @@ public class CodeLabel extends JPanel{
 		//TODO
 		//Kinda messy bro idk, clean this up
 		
-		int codeX = 25;
+		int codeX = 50;
 		int codeY = 50;
 		
 		int diagX = 200 - codeX;

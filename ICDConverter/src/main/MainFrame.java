@@ -31,7 +31,7 @@ public class MainFrame extends JFrame{
 	private int width;
 	private int height;
 	
-	private JFrame newCodeFrame;
+	private JFrame newCodeFrame, dictionaryFrame;
 	
 	private CustomDialog errorBox;
 	
@@ -88,6 +88,39 @@ public class MainFrame extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				mainPane.bottomPane.codeField.removeLabels();
 				System.out.println("Clear clicked");
+			}
+			
+		});
+		//}}
+		
+		//{{Dictionary button logic
+		mainPane.settingsPane.dictionaryButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Dictionary button clicked");
+				dictionaryButtonFunction();
+			}
+			
+		});
+		//}}
+		
+		//{{Settings button logic
+		mainPane.settingsPane.settingsButton.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Settings button clicked");
+			}
+			
+		});
+		//}}
+		
+		//{{Save button logic
+		//Honestly might just get rid of this button
+		//Don't know what to do with it
+		mainPane.settingsPane.saveButton.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Save button clicked");
 			}
 			
 		});
@@ -162,6 +195,35 @@ public class MainFrame extends JFrame{
 			
 		});
 		//}}
+		
+	}
+	
+	public void createDictionaryFrame() {
+		
+		dictionaryFrame = new JFrame("Dictionary");
+		Dimension newD = new Dimension(250, 300);
+		dictionaryFrame.setPreferredSize(newD);
+		dictionaryFrame.setResizable(false);
+		dictionaryFrame.setLayout(new BorderLayout());
+		dictionaryFrame.setUndecorated(true);
+		dictionaryFrame.pack();
+		dictionaryFrame.setLocationRelativeTo(null);
+		
+		DictionaryPane dictionaryPane = new DictionaryPane(mainDictionary);
+		
+		dictionaryFrame.add(dictionaryPane, BorderLayout.CENTER);
+		
+		dictionaryPane.okButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("OK button clicked");
+				//closes dictionaryPane on OK button click
+				dictionaryFrame.dispatchEvent(new WindowEvent(dictionaryFrame, WindowEvent.WINDOW_CLOSING));
+				//set parent JFrame to enabled
+				setEnabled(true);
+			}
+			
+		});
 		
 	}
 	
@@ -267,4 +329,12 @@ public class MainFrame extends JFrame{
 			
 	}
 
+	public void dictionaryButtonFunction() {
+		
+		createDictionaryFrame();
+		setEnabled(false);
+		dictionaryFrame.setVisible(true);
+		
+	}
+	
 }

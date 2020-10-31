@@ -13,7 +13,7 @@ import javax.swing.border.EtchedBorder;
 public class SettingsPane extends JPanel{
 
 	private static final long serialVersionUID = 1L;
-	private CustomButton settingsButton, dictionaryButton, saveButton;
+	public CustomButton settingsButton, dictionaryButton, saveButton;
 	
 	SettingsPane(int width, int height) {
 		
@@ -24,8 +24,6 @@ public class SettingsPane extends JPanel{
 		setPreferredSize(d);
 		setBackground(Color.WHITE);
 		
-		//Buttons
-		//{{
 		settingsButton = new CustomButton("Settings");
 		dictionaryButton = new CustomButton("Dictionary");
 		saveButton = new CustomButton("Save");
@@ -33,31 +31,6 @@ public class SettingsPane extends JPanel{
 		add(settingsButton, BorderLayout.WEST);
 		add(dictionaryButton, BorderLayout.CENTER);
 		add(saveButton, BorderLayout.EAST);
-		
-		settingsButton.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Settings clicked");
-			}
-			
-		});
-		
-		dictionaryButton.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Dictionary clicked");
-			}
-			
-		});
-		
-		saveButton.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Save clicked");
-			}
-			
-		});
-		//}}
 		
 	}
 	

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class ICDDictionary {
 	
-	private ArrayList<ICDCode> codesList;
+	public ArrayList<ICDCode> codesList;
 	
 	public ICDDictionary() throws IOException {
 		//TODO

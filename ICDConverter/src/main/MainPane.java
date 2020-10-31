@@ -11,7 +11,7 @@ public class MainPane extends JPanel{
 	private static final long serialVersionUID = 1L;
 	public BottomPane bottomPane;
 	public TopPane topPane;
-	private SettingsPane settingsPane;
+	public SettingsPane settingsPane;
 	
 	MainPane(int width, int height) {
 		
