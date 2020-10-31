@@ -23,6 +23,7 @@ public class DictionaryPane extends JPanel{
 	private JLabel dictionaryLabel = new JLabel();
 	
 	DictionaryPane(ICDDictionary mainDictionary) {
+		//CREATE FUNCTIONS TO DELETE AND EDIT CODES
 		
 		setLayout(new BorderLayout());
 		setBorder(BorderFactory.createEtchedBorder(1));
