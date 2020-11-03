@@ -140,6 +140,22 @@ public class ICDDictionary {
 		
 	}
 	
+	public void deleteCode(String code) throws IOException {
+		//Delete given code
+		code = code.toUpperCase();
+		
+		for (int i = 0; i < codesList.size(); i++) {
+			
+			if (codesList.get(i).getCode().toUpperCase().equals(code)) {
+				codesList.remove(i);
+			}
+			
+		}
+		
+		clearAndRepopulateDictionary();
+		
+	}
+	
 	private ICDCode manipulate(String code) {
 		//Grab an ICDCode object to manipulate (add/remove diagnosis, etc.)
 		code = code.toUpperCase();

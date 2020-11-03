@@ -3,17 +3,17 @@ package main;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.border.EtchedBorder;
 
 public class SettingsPane extends JPanel{
 
 	private static final long serialVersionUID = 1L;
-	public CustomButton settingsButton, dictionaryButton, saveButton;
+	public CustomButton settingsButton, dictionaryButton, editButton;
 	
 	SettingsPane(int width, int height) {
 		
@@ -26,11 +26,11 @@ public class SettingsPane extends JPanel{
 		
 		settingsButton = new CustomButton("Settings");
 		dictionaryButton = new CustomButton("Dictionary");
-		saveButton = new CustomButton("Save");
-		
+		editButton = new CustomButton("Edit");
+				
 		add(settingsButton, BorderLayout.WEST);
 		add(dictionaryButton, BorderLayout.CENTER);
-		add(saveButton, BorderLayout.EAST);
+		add(editButton, BorderLayout.EAST);
 		
 	}
 	

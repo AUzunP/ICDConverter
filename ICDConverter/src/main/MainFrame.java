@@ -31,7 +31,7 @@ public class MainFrame extends JFrame{
 	private int width;
 	private int height;
 	
-	private JFrame newCodeFrame, dictionaryFrame;
+	private JFrame newCodeFrame, dictionaryFrame, editFrame;
 	
 	private CustomDialog errorBox;
 	
@@ -114,13 +114,12 @@ public class MainFrame extends JFrame{
 		});
 		//}}
 		
-		//{{Save button logic
-		//Honestly might just get rid of this button
-		//Don't know what to do with it
-		mainPane.settingsPane.saveButton.addActionListener(new ActionListener() {
+		//{{Edit button logic
+		mainPane.settingsPane.editButton.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Save button clicked");
+				System.out.println("Edit button clicked");
+				editButtonFunction();
 			}
 			
 		});
@@ -224,6 +223,23 @@ public class MainFrame extends JFrame{
 			}
 			
 		});
+		
+	}
+	
+	public void createEditFrame() {
+		
+		editFrame = new JFrame("Edit");
+		Dimension newD = new Dimension(450, 200);
+		editFrame.setPreferredSize(newD);
+		editFrame.setResizable(false);
+		editFrame.setLayout(new BorderLayout());
+		//editFrame.setUndecorated(true);
+		editFrame.pack();
+		editFrame.setLocationRelativeTo(null);
+		
+		EditPane editPane = new EditPane();
+		
+		editFrame.add(editPane, BorderLayout.CENTER);
 		
 	}
 	
@@ -334,6 +350,14 @@ public class MainFrame extends JFrame{
 		createDictionaryFrame();
 		setEnabled(false);
 		dictionaryFrame.setVisible(true);
+		
+	}
+	
+	public void editButtonFunction() {
+		
+		createEditFrame();
+		setEnabled(false);
+		editFrame.setVisible(true);
 		
 	}
 	

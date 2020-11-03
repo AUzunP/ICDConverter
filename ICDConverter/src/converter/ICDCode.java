@@ -6,19 +6,6 @@ public class ICDCode {
 	private String code;
 	private ArrayList<String> diagnoses;
 	
-//	ICDCode(String code, String initialDiagnosis) {
-//		OLD CODE MIGHT USE LATER ON NOT SURE
-		//For user input
-//		//TODO
-//		//Make it so that the search function is not case sensitive and any added
-//		//is added in lower-case. Maybe make use of separate function
-//		
-//		this.diagnoses = new ArrayList<String>();
-//		this.code = code;
-//		this.diagnoses.add(initialDiagnosis);
-//		
-//	}
-	
 	ICDCode(String entry) {
 		//For input from codes.txt file
 		entry = entry.toUpperCase();
