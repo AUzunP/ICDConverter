@@ -20,14 +20,14 @@ public class CodeLabel extends JPanel{
 	private JLabel codeText;
 	private JTextField allDiagnosis;
 	
-	CodeLabel(String code, ArrayList<String> diagnosis) {
+	CodeLabel(String code, ArrayList<String> diagnosis, int diagXSize) {
 		//TODO
 		//Kinda messy bro idk, clean this up
 		
 		int codeX = 50;
 		int codeY = 50;
 		
-		int diagX = 200 - codeX;
+		int diagX = diagXSize - 50;
 		int diagY = codeY;
 		
 		//code size
@@ -36,6 +36,8 @@ public class CodeLabel extends JPanel{
 		codeText = new JLabel(code);
 		
 		codeText.setPreferredSize(d);
+		codeText.setMinimumSize(d);
+		codeText.setMaximumSize(d);
 		
 		codeText.setHorizontalAlignment(SwingConstants.CENTER);
 		codeText.setVerticalAlignment(SwingConstants.CENTER);

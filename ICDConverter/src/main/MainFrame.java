@@ -229,7 +229,7 @@ public class MainFrame extends JFrame{
 	public void createEditFrame() {
 		
 		editFrame = new JFrame("Edit");
-		Dimension newD = new Dimension(450, 200);
+		Dimension newD = new Dimension(550, 200);
 		editFrame.setPreferredSize(newD);
 		editFrame.setResizable(false);
 		editFrame.setLayout(new BorderLayout());
@@ -240,6 +240,58 @@ public class MainFrame extends JFrame{
 		EditPane editPane = new EditPane();
 		
 		editFrame.add(editPane, BorderLayout.CENTER);
+		
+		//{{Button functions
+		
+		editPane.removeDiagnosis.button.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Remove diagnosis button clicked");
+			}
+			
+		});
+
+		editPane.addDiagnosis.button.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Add diagnosis button clicked");
+			}
+			
+		});
+		
+		editPane.changeCode.button.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Change code button clicked");
+			}
+			
+		});
+		
+		editPane.deleteCodeButton.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Delete code button clicked");
+			}
+			
+		});
+		
+		editPane.addCodeButton.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Add code button clicked");
+			}
+			
+		});
+		
+		editPane.searchButton.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Search button clicked");
+			}
+			
+		});
+		
+		//}}
 		
 	}
 	

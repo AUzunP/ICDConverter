@@ -12,6 +12,8 @@ public class MainPanelCodes extends JPanel{
 	//TODO
 	//THIS SHOULD BE RESET TO ZERO EACH TIME CLEAR BUTTON IS PRESSED ON BOTTOM PANEL
 	private int currY = 0;
+	//set to 200 for both the main panel and dictionary, but can change it to another value for EditPane
+	public int diagXSize = 200;
 	
 	MainPanelCodes() {
 		
@@ -36,7 +38,7 @@ public class MainPanelCodes extends JPanel{
 		
 		c = new GridBagConstraints();
 		
-		CodeLabel codeLabel = new CodeLabel(code, diagnosis);
+		CodeLabel codeLabel = new CodeLabel(code, diagnosis, diagXSize);
 		
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.weightx = 0.5;
@@ -52,6 +54,10 @@ public class MainPanelCodes extends JPanel{
 		this.revalidate();
 		this.repaint();
 		
+	}
+	
+	public void changeDiagXSize(int diagXSize) {
+		this.diagXSize = diagXSize;
 	}
 	
 }
