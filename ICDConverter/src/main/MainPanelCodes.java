@@ -1,6 +1,7 @@
 package main;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -16,8 +17,11 @@ public class MainPanelCodes extends JPanel{
 	//set to 200 for both the main panel and dictionary, but can change it to another value for EditPane
 	public int diagXSize = 200;
 	
+	public ArrayList<ICDCode> codeInSearchBar;
+	
 	MainPanelCodes() {
 		
+		codeInSearchBar = new ArrayList<ICDCode>();
 		setLayout(new GridBagLayout());
 		setBorder(BorderFactory.createEtchedBorder(1));
 		
@@ -48,8 +52,7 @@ public class MainPanelCodes extends JPanel{
 		c.anchor = GridBagConstraints.PAGE_START;
 		
 		add(codeLabel, c);
-		
-		System.out.println("HERE");
+		codeInSearchBar.add(code);
 		
 		currY++;
 		this.revalidate();

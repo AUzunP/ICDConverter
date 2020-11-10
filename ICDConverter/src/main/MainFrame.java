@@ -147,7 +147,7 @@ public class MainFrame extends JFrame{
 		newCodeFrame.pack();
 		newCodeFrame.setLocationRelativeTo(null);
 		
-		NonexistantCodePane newCodePane = new NonexistantCodePane(100, 200, errorTextString);
+		NonexistentCodePane newCodePane = new NonexistentCodePane(100, 200, errorTextString);
 		
 		newCodeFrame.add(newCodePane, BorderLayout.CENTER);
 		
@@ -248,7 +248,20 @@ public class MainFrame extends JFrame{
 		editPane.removeDiagnosis.button.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
+				String diagnosisToDelete = editPane.removeDiagnosis.field.getText();
 				System.out.println("Remove diagnosis button clicked");
+				
+				if (diagnosisToDelete != null) {
+					editPane.searchedCode.codeInSearchBar.get(0).deleteDiagnosis(diagnosisToDelete);
+					
+					try {
+						mainDictionary.clearAndRepopulateDictionary();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+					
+				}
+				
 			}
 			
 		});
@@ -257,7 +270,20 @@ public class MainFrame extends JFrame{
 		editPane.addDiagnosis.button.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
+				String diagnosisToAdd = editPane.addDiagnosis.field.getText();
 				System.out.println("Add diagnosis button clicked");
+				
+				if (diagnosisToAdd != null) {
+					editPane.searchedCode.codeInSearchBar.get(0).addDiagnosis(diagnosisToAdd);	
+					
+					try {
+						mainDictionary.clearAndRepopulateDictionary();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+					
+				}
+				
 			}
 			
 		});
@@ -267,15 +293,44 @@ public class MainFrame extends JFrame{
 
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Change code button clicked");
+				String newCode = editPane.changeCode.field.getText();
+				
+				if (newCode != null) {
+					editPane.searchedCode.codeInSearchBar.get(0).changeCode(newCode);
+					
+					try {
+						mainDictionary.clearAndRepopulateDictionary();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+					
+				}
+				
 			}
 			
 		});
 		
-		//Delete code
+		//Delete code UNCOMMENT DELETION PART
 		editPane.deleteCodeButton.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Delete code button clicked");
+				
+				if (!(editPane.searchedCode.codeInSearchBar.isEmpty())) {
+					ICDCode codeToDelete = editPane.searchedCode.codeInSearchBar.get(0);
+					System.out.println(codeToDelete.getCode());
+					
+					//DELETION PART
+//					try {
+//						mainDictionary.deleteCode(codeToDelete.getCode());
+//					} catch (IOException e1) {
+//						e1.printStackTrace();
+//					}
+					
+				} else {
+					System.out.println("No code to delete");
+				}
+				
 			}
 			
 		});
@@ -285,6 +340,7 @@ public class MainFrame extends JFrame{
 			
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Add code button clicked");
+				//Open non existent code pane
 			}
 			
 		});
@@ -304,9 +360,10 @@ public class MainFrame extends JFrame{
 					codeToAdd = mainDictionary.manipulate(returnedCode);
 				}
 				
-				//add that code to codelabel
+				//add that code to code label
 				if (codeToAdd != null) {
 					//ensure code label lists one code only
+					editPane.searchedCode.codeInSearchBar.clear();
 					editPane.searchedCode.removeLabels();
 					editPane.searchedCode.addCodeLabel(codeToAdd);
 				}

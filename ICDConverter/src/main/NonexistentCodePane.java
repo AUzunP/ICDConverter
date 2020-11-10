@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class NonexistantCodePane extends JPanel{
+public class NonexistentCodePane extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	public CustomButton cancelButton;
@@ -21,7 +21,7 @@ public class NonexistantCodePane extends JPanel{
 	private JLabel enterCodeLabel;
 	public JTextField enterCode;
 	
-	NonexistantCodePane(int width, int height, String errorTextString) {
+	NonexistentCodePane(int width, int height, String errorTextString) {
 		
 		setLayout(new GridLayout(7, 0));
 		setBorder(BorderFactory.createEtchedBorder(1));

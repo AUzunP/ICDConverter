@@ -154,4 +154,9 @@ public class ICDCode {
 		return formattedCode;
 	}
 	
+	public void changeCode(String newCode) {
+		//Change the code, for example I11.0 to I10
+		this.code = newCode;
+	}
+	
 }
