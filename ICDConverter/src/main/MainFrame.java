@@ -23,7 +23,7 @@ public class MainFrame extends JFrame{
 	//Line 130
 	//Must format entered information from diagnosis and code before submitting into dictionary
 	//Ensure that information in corresponding text fields are viable, throw error if not and then ask
-	//for re-input
+	//for re-input.
 	
 	private static final long serialVersionUID = 1L;
 
