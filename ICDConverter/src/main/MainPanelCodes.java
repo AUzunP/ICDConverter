@@ -1,10 +1,11 @@
 package main;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+
+import converter.ICDCode;
 
 public class MainPanelCodes extends JPanel{
 
@@ -34,11 +35,11 @@ public class MainPanelCodes extends JPanel{
 		
 	}
 	
-	public void addCodeLabel(String code, ArrayList<String> diagnosis) {
+	public void addCodeLabel(ICDCode code) {
 		
 		c = new GridBagConstraints();
 		
-		CodeLabel codeLabel = new CodeLabel(code, diagnosis, diagXSize);
+		CodeLabel codeLabel = new CodeLabel(code, diagXSize);
 		
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.weightx = 0.5;

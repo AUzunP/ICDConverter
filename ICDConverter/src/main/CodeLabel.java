@@ -2,7 +2,6 @@ package main;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -15,12 +14,14 @@ import javax.swing.UIManager;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
+import converter.ICDCode;
+
 public class CodeLabel extends JPanel{
 	
 	private JLabel codeText;
 	private JTextField allDiagnosis;
 	
-	CodeLabel(String code, ArrayList<String> diagnosis, int diagXSize) {
+	CodeLabel(ICDCode code, int diagXSize) {
 		//TODO
 		//Kinda messy bro idk, clean this up
 		
@@ -33,7 +34,7 @@ public class CodeLabel extends JPanel{
 		//code size
 		Dimension d = new Dimension(codeX, codeY);
 		
-		codeText = new JLabel(code);
+		codeText = new JLabel(code.getCode());
 		
 		codeText.setPreferredSize(d);
 		codeText.setMinimumSize(d);
@@ -44,8 +45,8 @@ public class CodeLabel extends JPanel{
 		
 		String diagnosisToString = "";
 		
-		for (int i = 0; i < diagnosis.size(); i++) {
-			diagnosisToString += diagnosis.get(i) + ", ";
+		for (int i = 0; i < code.returnDiagnosis().size(); i++) {
+			diagnosisToString += code.returnDiagnosis().get(i) + ", ";
 		}
 		
 		diagnosisToString = diagnosisToString.substring(0, diagnosisToString.length() - 2);

@@ -14,6 +14,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JFrame;
 
+import converter.ICDCode;
 import converter.ICDDictionary;
 
 public class MainFrame extends JFrame{
@@ -237,12 +238,13 @@ public class MainFrame extends JFrame{
 		editFrame.pack();
 		editFrame.setLocationRelativeTo(null);
 		
-		EditPane editPane = new EditPane();
+		EditPane editPane = new EditPane(mainDictionary);
 		
 		editFrame.add(editPane, BorderLayout.CENTER);
 		
 		//{{Button functions
-		
+
+		//Remove diagnosis
 		editPane.removeDiagnosis.button.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -251,6 +253,7 @@ public class MainFrame extends JFrame{
 			
 		});
 
+		//Add diagnosis
 		editPane.addDiagnosis.button.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -259,6 +262,7 @@ public class MainFrame extends JFrame{
 			
 		});
 		
+		//Change code
 		editPane.changeCode.button.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -267,6 +271,7 @@ public class MainFrame extends JFrame{
 			
 		});
 		
+		//Delete code
 		editPane.deleteCodeButton.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -275,6 +280,7 @@ public class MainFrame extends JFrame{
 			
 		});
 		
+		//Add new code
 		editPane.addCodeButton.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -283,10 +289,28 @@ public class MainFrame extends JFrame{
 			
 		});
 		
+		//Search button
 		editPane.searchButton.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Search button clicked");
+				//System.out.println("Search button clicked");
+				ICDCode codeToAdd = null;
+				
+				//check if diagnosis in search bar is associated with code
+				String returnedCode = mainDictionary.searchList(editPane.searchBar.getText());
+				
+				//if so, change codeToAdd to that code
+				if (returnedCode != null) {
+					codeToAdd = mainDictionary.manipulate(returnedCode);
+				}
+				
+				//add that code to codelabel
+				if (codeToAdd != null) {
+					//ensure code label lists one code only
+					editPane.searchedCode.removeLabels();
+					editPane.searchedCode.addCodeLabel(codeToAdd);
+				}
+				
 			}
 			
 		});
@@ -381,8 +405,9 @@ public class MainFrame extends JFrame{
 				
 				System.out.println(mainDictionary.returnDiagnoses(returnedCode));
 				
-				mainPane.bottomPane.codeField.addCodeLabel(returnedCode, 
-						mainDictionary.returnDiagnoses(returnedCode));
+//				mainPane.bottomPane.codeField.addCodeLabel(returnedCode, 
+//						mainDictionary.returnDiagnoses(returnedCode));
+				mainPane.bottomPane.codeField.addCodeLabel(mainDictionary.manipulate(returnedCode));
 				
 			} else {
 				System.out.println("Code does not exist...");

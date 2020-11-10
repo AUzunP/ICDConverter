@@ -23,7 +23,6 @@ public class DictionaryPane extends JPanel{
 	private JLabel dictionaryLabel = new JLabel();
 	
 	DictionaryPane(ICDDictionary mainDictionary) {
-		//CREATE FUNCTIONS TO DELETE AND EDIT CODES
 		
 		setLayout(new BorderLayout());
 		setBorder(BorderFactory.createEtchedBorder(1));
@@ -50,8 +49,10 @@ public class DictionaryPane extends JPanel{
 		//Populate dictionaryPaneCodeField
 		for (int i = 0; i < mainDictionary.codesList.size(); i++) {
 			
-			dictionaryPaneCodeField.addCodeLabel(mainDictionary.codesList.get(i).getCode(), 
-					mainDictionary.codesList.get(i).returnDiagnosis());
+//			dictionaryPaneCodeField.addCodeLabel(mainDictionary.codesList.get(i).getCode(), 
+//					mainDictionary.codesList.get(i).returnDiagnosis());
+			
+			dictionaryPaneCodeField.addCodeLabel(mainDictionary.codesList.get(i));
 			
 		}
 		

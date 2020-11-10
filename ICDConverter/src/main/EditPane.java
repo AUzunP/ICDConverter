@@ -4,12 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import converter.ICDDictionary;
 
 public class EditPane extends JPanel{
 
@@ -20,7 +21,7 @@ public class EditPane extends JPanel{
 	public MiniPane addDiagnosis, removeDiagnosis, changeCode;
 	public MainPanelCodes searchedCode;
 	
-	EditPane() {
+	EditPane(ICDDictionary mainDictionary) {
 		//450 by 200
 		setLayout(new GridBagLayout());
 		setBorder(BorderFactory.createBevelBorder(1));
@@ -33,19 +34,6 @@ public class EditPane extends JPanel{
 		Dimension d = new Dimension(300, 70);
 		searchedCode = new MainPanelCodes();
 		searchedCode.changeDiagXSize(350);
-		
-//		ArrayList<String> test = new ArrayList<String>();
-//		test.add("HEY");
-//		test.add("THERE");
-//		test.add("THERE");
-//		test.add("THERE");
-//		test.add("THERE");
-//		test.add("THERE");
-//		test.add("THERE");
-//		test.add("THERE");
-//		test.add("THERE");
-//		test.add("THERE");
-//		searchedCode.addCodeLabel("S32.96A", test);
 		searchedCode.setPreferredSize(d);
 		searchedCode.setMinimumSize(d);
 		searchedCode.setMaximumSize(d);

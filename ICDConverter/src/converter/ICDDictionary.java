@@ -156,7 +156,7 @@ public class ICDDictionary {
 		
 	}
 	
-	private ICDCode manipulate(String code) {
+	public ICDCode manipulate(String code) {
 		//Grab an ICDCode object to manipulate (add/remove diagnosis, etc.)
 		code = code.toUpperCase();
 		ICDCode toManipulate = null;
