@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,6 +36,8 @@ public class MainFrame extends JFrame{
 	private JFrame newCodeFrame, dictionaryFrame, editFrame;
 	
 	private CustomDialog errorBox;
+	
+	private ICDCode codeToAdd;
 	
 	public ICDDictionary mainDictionary;
 	
@@ -248,7 +251,10 @@ public class MainFrame extends JFrame{
 		editPane.removeDiagnosis.button.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
+				
 				String diagnosisToDelete = editPane.removeDiagnosis.field.getText();
+				diagnosisToDelete = diagnosisToDelete.trim();
+				diagnosisToDelete = diagnosisToDelete.toUpperCase();
 				System.out.println("Remove diagnosis button clicked");
 				
 				if (diagnosisToDelete != null) {
@@ -260,6 +266,11 @@ public class MainFrame extends JFrame{
 						e1.printStackTrace();
 					}
 					
+					//Update code label in search bar
+					editPane.searchedCode.codeInSearchBar.clear();
+					editPane.searchedCode.removeLabels();
+					editPane.searchedCode.addCodeLabel(codeToAdd);
+					
 				}
 				
 			}
@@ -270,7 +281,10 @@ public class MainFrame extends JFrame{
 		editPane.addDiagnosis.button.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
+				
 				String diagnosisToAdd = editPane.addDiagnosis.field.getText();
+				diagnosisToAdd = diagnosisToAdd.trim();
+				diagnosisToAdd = diagnosisToAdd.toUpperCase();
 				System.out.println("Add diagnosis button clicked");
 				
 				if (diagnosisToAdd != null) {
@@ -282,6 +296,11 @@ public class MainFrame extends JFrame{
 						e1.printStackTrace();
 					}
 					
+					//Update code label in search bar
+					editPane.searchedCode.codeInSearchBar.clear();
+					editPane.searchedCode.removeLabels();
+					editPane.searchedCode.addCodeLabel(codeToAdd);
+					
 				}
 				
 			}
@@ -292,8 +311,11 @@ public class MainFrame extends JFrame{
 		editPane.changeCode.button.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Change code button clicked");
+				
 				String newCode = editPane.changeCode.field.getText();
+				newCode = newCode.trim();
+				newCode = newCode.toUpperCase();
+				System.out.println("Change code button clicked");
 				
 				if (newCode != null) {
 					editPane.searchedCode.codeInSearchBar.get(0).changeCode(newCode);
@@ -303,6 +325,11 @@ public class MainFrame extends JFrame{
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
+					
+					//Update code label in search bar
+					editPane.searchedCode.codeInSearchBar.clear();
+					editPane.searchedCode.removeLabels();
+					editPane.searchedCode.addCodeLabel(codeToAdd);
 					
 				}
 				
@@ -340,6 +367,8 @@ public class MainFrame extends JFrame{
 			
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Add code button clicked");
+				createNewCodeFrame("Enter a new code");
+				newCodeFrame.setVisible(true);
 				//Open non existent code pane
 			}
 			
@@ -349,11 +378,16 @@ public class MainFrame extends JFrame{
 		editPane.searchButton.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				//System.out.println("Search button clicked");
-				ICDCode codeToAdd = null;
+				
+				String toSearch = editPane.searchBar.getText();
+				toSearch = toSearch.trim();
+				toSearch = toSearch.toUpperCase();
+				System.out.println("Search button clicked");
+				
+				codeToAdd = null;
 				
 				//check if diagnosis in search bar is associated with code
-				String returnedCode = mainDictionary.searchList(editPane.searchBar.getText());
+				String returnedCode = mainDictionary.searchList(toSearch);
 				
 				//if so, change codeToAdd to that code
 				if (returnedCode != null) {
@@ -367,12 +401,22 @@ public class MainFrame extends JFrame{
 					editPane.searchedCode.removeLabels();
 					editPane.searchedCode.addCodeLabel(codeToAdd);
 				}
-				
+			
 			}
 			
 		});
 		
 		//}}
+		
+		//Action on window close
+		editFrame.addWindowListener(new WindowAdapter() {
+			
+			public void windowClosing(WindowEvent e) {
+				System.out.println("Edit window closed");
+				setEnabled(true);
+			}
+			
+		});
 		
 	}
 	

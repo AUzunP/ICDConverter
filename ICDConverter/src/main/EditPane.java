@@ -54,7 +54,7 @@ public class EditPane extends JPanel{
 		
 		//SEARCH BAR
 		d = new Dimension(350, 30);
-		searchBar = new JTextField("Enter diagnosis/code to search...");
+		searchBar = new JTextField("");
 		searchBar.setPreferredSize(d);
 		searchBar.setMinimumSize(d);
 		searchBar.setMaximumSize(d);
