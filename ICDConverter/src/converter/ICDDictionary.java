@@ -61,7 +61,22 @@ public class ICDDictionary {
 		}
 	}
 	
-	public String searchList(String diagnosisToSearch) {
+	public ArrayList<String> searchListCode(String codeToSearch) {
+		
+		codeToSearch = codeToSearch.toUpperCase();
+		
+		for (int i = 0; i < codesList.size(); i++) {
+			if (codesList.get(i).getCode().equals(codeToSearch)) {
+				//System.out.println("Code found");
+				return codesList.get(i).returnDiagnosis();
+			}
+		}
+		
+		//System.out.println("Code not found");
+		return null;
+	}
+	
+	public String searchListDiagnosis(String diagnosisToSearch) {
 		//Searches entire dictionary for the given diagnosis to see if it is associated with a code
 		diagnosisToSearch = diagnosisToSearch.toUpperCase();
 		

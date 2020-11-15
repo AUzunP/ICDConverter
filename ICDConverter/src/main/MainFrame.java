@@ -387,7 +387,7 @@ public class MainFrame extends JFrame{
 				codeToAdd = null;
 				
 				//check if diagnosis in search bar is associated with code
-				String returnedCode = mainDictionary.searchList(toSearch);
+				String returnedCode = mainDictionary.searchListDiagnosis(toSearch);
 				
 				//if so, change codeToAdd to that code
 				if (returnedCode != null) {
@@ -453,6 +453,14 @@ public class MainFrame extends JFrame{
 			return false;
 		}
 		
+		if (!(mainDictionary.searchListCode(code) == null)) {
+			newCodeFrame.setEnabled(false);
+			errorBox.changeErrorText("Code already exists.");
+			//System.out.println(code);
+			errorBox.setVisible(true);
+			return false;
+		}
+		
 		return true;
 	}
 	
@@ -497,7 +505,7 @@ public class MainFrame extends JFrame{
 			String enteredDiagnosis = mainPane.topPane.textField.getText();
 			enteredDiagnosis = enteredDiagnosis.toUpperCase();
 			
-			String returnedCode = mainDictionary.searchList(enteredDiagnosis);
+			String returnedCode = mainDictionary.searchListDiagnosis(enteredDiagnosis);
 			
 			if (returnedCode != null) {
 				
@@ -513,6 +521,12 @@ public class MainFrame extends JFrame{
 			} else {
 				System.out.println("Code does not exist...");
 
+				//Cut off diagnosis if it's too long
+				if (enteredDiagnosis.length() >= 12) {
+					enteredDiagnosis = enteredDiagnosis.substring(0, 12);
+					enteredDiagnosis += "...";
+				}
+				
 				createNewCodeFrame(enteredDiagnosis + " is not associated with an existing code. ");
 				
 				newCodeFrame.setVisible(true);
