@@ -35,6 +35,7 @@ public class ICDCode {
 		
 		String tempCode = "";
 		//Get string in between { and } which are the diagnoses
+		System.out.println("ENTRY " + entry);
 		entry = entry.substring(entry.indexOf('{') + 1, entry.indexOf('}'));
 		
 		//Separate every string of diagnoses

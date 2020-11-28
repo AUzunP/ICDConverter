@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class ICDDictionary {
 	
 	public ArrayList<ICDCode> codesList;
+	public String codesFilePath = "codes";
 	
 	public ICDDictionary() throws IOException {
 		//TODO
@@ -29,7 +30,7 @@ public class ICDDictionary {
 		
 		//THIS HAS TO BE CODES.TXT NOT CODES WHEN EXPORTING INTO .exe
 		//DO THE SAME FOR OTHER FILE WRITERSd
-		BufferedReader reader = new BufferedReader(new FileReader("codes"));
+		BufferedReader reader = new BufferedReader(new FileReader(codesFilePath));
 		
 		String textContents = "";
 		String line;
@@ -116,7 +117,7 @@ public class ICDDictionary {
 		}
 
 		//add code to text file		
-		FileWriter writer = new FileWriter("codes", true);
+		FileWriter writer = new FileWriter(codesFilePath, true);
 		writer.write(codeToAppend + "\n");
 		writer.close();
 		
@@ -124,7 +125,7 @@ public class ICDDictionary {
 	
 	private void clearDictionary() throws IOException {
 		//Should be clearing and re-populating dictionary after every code change
-		FileWriter fWriter = new FileWriter("codes", false);
+		FileWriter fWriter = new FileWriter(codesFilePath, false);
 		PrintWriter pWriter = new PrintWriter(fWriter, false);
 		pWriter.flush();
 		pWriter.close();
