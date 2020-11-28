@@ -168,6 +168,7 @@ public class MainFrame extends JFrame{
 		});
 		//}}
 		
+		//UNCOMMENT ADDITION PART
 		//{{Add to dictionary button logic
 		newCodePane.addToDictionaryButton.addActionListener(new ActionListener() {
 			
@@ -180,11 +181,11 @@ public class MainFrame extends JFrame{
 				System.out.println("Diagnosis: " + diagnosis + "\nCode: " + code);
 				
 				if (viableEntry(diagnosis, code)) {
-					formatEntries(diagnosis, code);
+					String formattedEntry = formatEntries(diagnosis, code);
 					
 					//MUST FORMAT INFORMATION FROM DIAGNOSIS AND CODE BEFORE SUBMITTING TO DICTIONARY
 //					try {
-//						mainDictionary.appendDictionary(diagnosis, true);
+//						mainDictionary.appendDictionary(formattedEntry, true);
 //					} catch (IOException e1) {
 //						// TODO Auto-generated catch block
 //						e1.printStackTrace();
@@ -491,7 +492,7 @@ public class MainFrame extends JFrame{
 		formattedEntry = formattedEntry.substring(0, (formattedEntry.length()-2));
 		formattedEntry += "}";
 		
-		System.out.println(formattedEntry);
+		System.out.println("ln 495 mainframe Formatted entry: " + formattedEntry);
 		
 		return formattedEntry;
 	}
