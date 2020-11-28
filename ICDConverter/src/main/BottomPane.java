@@ -27,13 +27,14 @@ public class BottomPane extends JPanel{
 		
 		//set width same size as MainFrame, set height to 40% of height
 		Dimension d = new Dimension(width, ((int)((double)height*.65)));
-		this.setPreferredSize(d);
-		this.setBackground(Color.WHITE);
+		setPreferredSize(d);
+		setMinimumSize(d);
+		setBackground(Color.WHITE);
 		
-		this.setLayout(new BorderLayout());
+		setLayout(new BorderLayout());
 		
 		clearButton = new CustomButton("Clear");
-		this.add(clearButton, BorderLayout.SOUTH);
+		add(clearButton, BorderLayout.SOUTH);
 		
 		codeField = new MainPanelCodes();
 		
@@ -43,7 +44,7 @@ public class BottomPane extends JPanel{
 		scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI());
 		scrollPane.getHorizontalScrollBar().setUI(new BasicScrollBarUI());
 
-		this.add(scrollPane, BorderLayout.CENTER);
+		add(scrollPane, BorderLayout.CENTER);
 		
 	}
 	

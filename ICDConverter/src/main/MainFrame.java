@@ -22,7 +22,7 @@ public class MainFrame extends JFrame{
 
 	//TODO
 	//Line 130
-	//Must format entered information from fdsafdasdiagnosis and code before submitting into dictionary
+	//Must format entered information from diagnosis and code before submitting into dictionary
 	//Ensure that information in corresponding text fields are viable, throw error if not and then ask
 	//for re-input.
 	
@@ -48,7 +48,7 @@ public class MainFrame extends JFrame{
 		setResizable(false);
 		setLayout(new BorderLayout());
 		
-		this.width = 200;
+		this.width = 255;
 		this.height = 400;
 		
 		// (x, y)
@@ -58,7 +58,7 @@ public class MainFrame extends JFrame{
 		setMinimumSize(d);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		mainPane = new MainPane(width, height);
+		mainPane = new MainPane(width-5, height-5);
 		add(mainPane, BorderLayout.CENTER);
 		
 		//{{Top pane enter button logic
@@ -138,7 +138,7 @@ public class MainFrame extends JFrame{
 		
 	}
 	
-	private void createNewCodeFrame(String errorTextString) {
+	private void createNewCodeFrame(String errorTextString, JFrame parentFrame) {
 		//new code frame sprung from entering an invalid diagnosis 
 		
 		newCodeFrame = new JFrame("New Code");
@@ -148,7 +148,7 @@ public class MainFrame extends JFrame{
 		newCodeFrame.setLayout(new BorderLayout());
 		newCodeFrame.setUndecorated(true);
 		newCodeFrame.pack();
-		newCodeFrame.setLocationRelativeTo(null);
+		newCodeFrame.setLocationRelativeTo(mainPane);
 		
 		NonexistentCodePane newCodePane = new NonexistentCodePane(100, 200, errorTextString);
 		
@@ -163,6 +163,11 @@ public class MainFrame extends JFrame{
 				newCodeFrame.dispatchEvent(new WindowEvent(newCodeFrame, WindowEvent.WINDOW_CLOSING));
 				//set parent JFrame to enabled
 				setEnabled(true);
+				
+				if (parentFrame != null) {
+					parentFrame.setEnabled(true);
+				}
+				
 			}
 			
 		});
@@ -200,6 +205,21 @@ public class MainFrame extends JFrame{
 		});
 		//}}
 		
+		//Action on window close
+		newCodeFrame.addWindowListener(new WindowAdapter() {
+							
+			public void windowClosing(WindowEvent e) {
+				System.out.println("New code window closed");
+				setEnabled(true);
+				
+				if (parentFrame != null) {
+					parentFrame.setEnabled(true);
+				}
+				
+			}
+							
+		});
+		
 	}
 	
 	public void createDictionaryFrame() {
@@ -211,7 +231,7 @@ public class MainFrame extends JFrame{
 		dictionaryFrame.setLayout(new BorderLayout());
 		dictionaryFrame.setUndecorated(true);
 		dictionaryFrame.pack();
-		dictionaryFrame.setLocationRelativeTo(null);
+		dictionaryFrame.setLocationRelativeTo(mainPane);
 		
 		DictionaryPane dictionaryPane = new DictionaryPane(mainDictionary);
 		
@@ -229,6 +249,16 @@ public class MainFrame extends JFrame{
 			
 		});
 		
+		//Action on window close
+		dictionaryFrame.addWindowListener(new WindowAdapter() {
+					
+			public void windowClosing(WindowEvent e) {
+				System.out.println("Dictionary window closed");
+				setEnabled(true);
+			}
+					
+		});
+		
 	}
 	
 	public void createEditFrame() {
@@ -240,7 +270,7 @@ public class MainFrame extends JFrame{
 		editFrame.setLayout(new BorderLayout());
 		//editFrame.setUndecorated(true);
 		editFrame.pack();
-		editFrame.setLocationRelativeTo(null);
+		editFrame.setLocationRelativeTo(mainPane);
 		
 		EditPane editPane = new EditPane(mainDictionary);
 		
@@ -258,20 +288,26 @@ public class MainFrame extends JFrame{
 				diagnosisToDelete = diagnosisToDelete.toUpperCase();
 				System.out.println("Remove diagnosis button clicked");
 				
-				if (diagnosisToDelete != null) {
-					editPane.searchedCode.codeInSearchBar.get(0).deleteDiagnosis(diagnosisToDelete);
-					
-					try {
-						mainDictionary.clearAndRepopulateDictionary();
-					} catch (IOException e1) {
-						e1.printStackTrace();
+				try {
+				
+					if (diagnosisToDelete != null) {
+						editPane.searchedCode.codeInSearchBar.get(0).deleteDiagnosis(diagnosisToDelete);
+						
+						try {
+							mainDictionary.clearAndRepopulateDictionary();
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+						
+						//Update code label in search bar
+						editPane.searchedCode.codeInSearchBar.clear();
+						editPane.searchedCode.removeLabels();
+						editPane.searchedCode.addCodeLabel(codeToAdd);
+						
 					}
 					
-					//Update code label in search bar
-					editPane.searchedCode.codeInSearchBar.clear();
-					editPane.searchedCode.removeLabels();
-					editPane.searchedCode.addCodeLabel(codeToAdd);
-					
+				} catch (Exception nullEntry) {
+					System.out.println("Nothing was entered in remove diagnosis");
 				}
 				
 			}
@@ -288,20 +324,26 @@ public class MainFrame extends JFrame{
 				diagnosisToAdd = diagnosisToAdd.toUpperCase();
 				System.out.println("Add diagnosis button clicked");
 				
-				if (diagnosisToAdd != null) {
-					editPane.searchedCode.codeInSearchBar.get(0).addDiagnosis(diagnosisToAdd);	
-					
-					try {
-						mainDictionary.clearAndRepopulateDictionary();
-					} catch (IOException e1) {
-						e1.printStackTrace();
+				try {
+				
+					if (diagnosisToAdd != null) {
+						editPane.searchedCode.codeInSearchBar.get(0).addDiagnosis(diagnosisToAdd);	
+						
+						try {
+							mainDictionary.clearAndRepopulateDictionary();
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+						
+						//Update code label in search bar
+						editPane.searchedCode.codeInSearchBar.clear();
+						editPane.searchedCode.removeLabels();
+						editPane.searchedCode.addCodeLabel(codeToAdd);
+						
 					}
 					
-					//Update code label in search bar
-					editPane.searchedCode.codeInSearchBar.clear();
-					editPane.searchedCode.removeLabels();
-					editPane.searchedCode.addCodeLabel(codeToAdd);
-					
+				} catch (Exception nullEntry) {
+					System.out.println("Nothing was entered in add diagnosis");
 				}
 				
 			}
@@ -318,24 +360,30 @@ public class MainFrame extends JFrame{
 				newCode = newCode.toUpperCase();
 				System.out.println("Change code button clicked");
 				
-				if (newCode != null) {
-					editPane.searchedCode.codeInSearchBar.get(0).changeCode(newCode);
+				try {
 					
-					try {
-						mainDictionary.clearAndRepopulateDictionary();
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
+					if (newCode != null) {
+						editPane.searchedCode.codeInSearchBar.get(0).changeCode(newCode);
+						
+						try {
+							mainDictionary.clearAndRepopulateDictionary();
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+						
+						//Update code label in search bar
+						editPane.searchedCode.codeInSearchBar.clear();
+						editPane.searchedCode.removeLabels();
+						editPane.searchedCode.addCodeLabel(codeToAdd);
+						
+					}	
 					
-					//Update code label in search bar
-					editPane.searchedCode.codeInSearchBar.clear();
-					editPane.searchedCode.removeLabels();
-					editPane.searchedCode.addCodeLabel(codeToAdd);
-					
+				} catch (Exception nullEntry) {
+					System.out.println("Nothing was entered in change code");
 				}
 				
 			}
-			
+				
 		});
 		
 		//Delete code UNCOMMENT DELETION PART
@@ -349,11 +397,11 @@ public class MainFrame extends JFrame{
 					System.out.println(codeToDelete.getCode());
 					
 					//DELETION PART
-//					try {
-//						mainDictionary.deleteCode(codeToDelete.getCode());
-//					} catch (IOException e1) {
-//						e1.printStackTrace();
-//					}
+					try {
+						mainDictionary.deleteCode(codeToDelete.getCode());
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
 					
 				} else {
 					System.out.println("No code to delete");
@@ -368,9 +416,10 @@ public class MainFrame extends JFrame{
 			
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Add code button clicked");
-				createNewCodeFrame("Enter a new code");
+				createNewCodeFrame("Enter a new code", editFrame);
 				newCodeFrame.setVisible(true);
 				//Open non existent code pane
+				editFrame.setEnabled(false);
 			}
 			
 		});
@@ -528,7 +577,7 @@ public class MainFrame extends JFrame{
 					enteredDiagnosis += "...";
 				}
 				
-				createNewCodeFrame(enteredDiagnosis + " is not associated with an existing code. ");
+				createNewCodeFrame(enteredDiagnosis + " is not associated with an existing code. ", null);
 				
 				newCodeFrame.setVisible(true);
 				setEnabled(false);

@@ -22,6 +22,7 @@ public class SettingsPane extends JPanel{
 		
 		Dimension d = new Dimension(width, ((int)((double)height*.1)));
 		setPreferredSize(d);
+		setMinimumSize(d);
 		setBackground(Color.WHITE);
 		
 		settingsButton = new CustomButton("Settings");

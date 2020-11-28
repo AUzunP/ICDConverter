@@ -28,6 +28,7 @@ public class MainPane extends JPanel{
 		
 		c.anchor = GridBagConstraints.PAGE_START;
 		c.weightx = 0.5;
+		c.weighty = 0.5;
 		c.gridx = 0;
 		c.gridy = 0;
 		
@@ -35,6 +36,7 @@ public class MainPane extends JPanel{
 		
 		c.anchor = GridBagConstraints.CENTER;
 		c.weightx = 0.5;
+		c.weighty = 0.5;
 		c.gridx = 0;
 		c.gridy = 1;
 		
@@ -42,9 +44,9 @@ public class MainPane extends JPanel{
 		
 		c.anchor = GridBagConstraints.PAGE_END;
 		c.weightx = 0.5;
+		c.weighty = 0.5;
 		c.gridx = 0;
 		c.gridy = 2;
-		
 		add(bottomPane, c);
 		
 	}
