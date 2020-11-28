@@ -25,7 +25,7 @@ public class MainFrame extends JFrame{
 	//Must format entered information from diagnosis and code before submitting into dictionary
 	//Ensure that information in corresponding text fields are viable, throw error if not and then ask
 	//for re-input.
-	//test
+	//test 2
 	
 	private static final long serialVersionUID = 1L;
 
