@@ -189,12 +189,12 @@ public class MainFrame extends JFrame{
 					String formattedEntry = formatEntries(diagnosis, code);
 					
 					//MUST FORMAT INFORMATION FROM DIAGNOSIS AND CODE BEFORE SUBMITTING TO DICTIONARY
-//					try {
-//						mainDictionary.appendDictionary(formattedEntry, true);
-//					} catch (IOException e1) {
-//						// TODO Auto-generated catch block
-//						e1.printStackTrace();
-//					}
+					try {
+						mainDictionary.appendDictionary(formattedEntry, true);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					
 					newCodeFrame.dispatchEvent(new WindowEvent(newCodeFrame, WindowEvent.WINDOW_CLOSING));
 					setEnabled(true);
