@@ -14,6 +14,8 @@ public class NonexistentCodePane extends JPanel{
 	private static final long serialVersionUID = 1L;
 	public CustomButton cancelButton;
 	public CustomButton addToDictionaryButton;
+	public CustomButton internetLookupButton;
+	
 	private JTextArea errorText;
 	
 	private JLabel enterDiagnosisLabel;
@@ -23,7 +25,7 @@ public class NonexistentCodePane extends JPanel{
 	
 	NonexistentCodePane(int width, int height, String errorTextString) {
 		
-		setLayout(new GridLayout(7, 0));
+		setLayout(new GridLayout(8, 0));
 		setBorder(BorderFactory.createEtchedBorder(1));
 		
 		Dimension d = new Dimension(width, height);
@@ -58,7 +60,12 @@ public class NonexistentCodePane extends JPanel{
 		
 		enterCode = new JTextField();
 		
+		internetLookupButton = new CustomButton();
+		internetLookupButton.setBorder(BorderFactory.createEtchedBorder(1));
+		internetLookupButton.setText("Internet Lookup");
+		
 		add(errorText);
+		add(internetLookupButton);
 		add(enterDiagnosisLabel);
 		add(enterDiagnosis);
 		add(enterCodeLabel);

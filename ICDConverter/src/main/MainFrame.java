@@ -138,11 +138,13 @@ public class MainFrame extends JFrame{
 		
 	}
 	
+	
+	
 	private void createNewCodeFrame(String errorTextString, JFrame parentFrame) {
 		//new code frame sprung from entering an invalid diagnosis 
 		
 		newCodeFrame = new JFrame("New Code");
-		Dimension newD = new Dimension(200, 250);
+		Dimension newD = new Dimension(200, 275);
 		newCodeFrame.setPreferredSize(newD);
 		newCodeFrame.setResizable(false);
 		newCodeFrame.setLayout(new BorderLayout());
@@ -153,6 +155,17 @@ public class MainFrame extends JFrame{
 		NonexistentCodePane newCodePane = new NonexistentCodePane(100, 200, errorTextString);
 		
 		newCodeFrame.add(newCodePane, BorderLayout.CENTER);
+		
+		//{{Internet Lookup button logic
+		newCodePane.internetLookupButton.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Internet Lookup button clicked");
+				//drop in functionality from testCodes.java
+			}
+			
+		});
+		//}}
 		
 		//{{Cancel button logic
 		newCodePane.cancelButton.addActionListener(new ActionListener() {

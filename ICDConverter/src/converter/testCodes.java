@@ -31,45 +31,47 @@ public class testCodes {
         //manual addition of site for testing
         //siteList.add("https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z77-Z99/Z96-/Z96.651");
         
-        siteList = searchGoogle("right total hip arthroplasty");
+        //AUTO ADDITION
         
-        try {
-        	//URL for ICD 10 website
-        	doc = Jsoup.connect(siteList.get(0)).get();
-		} catch (IOException e) {
-			System.out.println("Couldn't fetch document...");
-			e.printStackTrace();
-		}
-        
-        //identifier is the class in html file that contains the ICD code
-        Elements identifier = doc.getElementsByClass("identifier");
-        identifier.toArray();
-        System.out.println(parseIdentifier(identifier.get(0).toString()));
-        
-        Elements bodyContent = doc.getElementsByClass("body-content");
-        String unformattedSynonyms = bodyContent.toString();
-        
-        int synonymStart = unformattedSynonyms.indexOf("Approximate Synonyms");
-        
-        //Start substring at "Approximate Synonym"
-        unformattedSynonyms = unformattedSynonyms.substring(synonymStart);
-        //Need second statement ensure </ul> is the one selected AFTER "Approximate Synonym" and not before
-        unformattedSynonyms = unformattedSynonyms.substring((unformattedSynonyms.indexOf("<ul>") + 4 ), 
-        		unformattedSynonyms.indexOf("</ul>"));
-        
-        //System.out.println("UNFORMATTED SYNONYMS ------------------------------");
-        //System.out.println(unformattedSynonyms);
-        
-        ArrayList<String> formattedSynonyms = new ArrayList<String>();
-        
-        formattedSynonyms = parseSynonyms(unformattedSynonyms);
-        
-        //System.out.println(siteList.toString());
-        System.out.println("Approximate Synonyms");
-        
-        for (int i = 0; i < formattedSynonyms.size(); i++) {
-        	System.out.println(formattedSynonyms.get(i));
-        }
+//        siteList = searchGoogle("right total hip arthroplasty");
+//        
+//        try {
+//        	//URL for ICD 10 website
+//        	doc = Jsoup.connect(siteList.get(0)).get();
+//		} catch (IOException e) {
+//			System.out.println("Couldn't fetch document...");
+//			e.printStackTrace();
+//		}
+//        
+//        //identifier is the class in html file that contains the ICD code
+//        Elements identifier = doc.getElementsByClass("identifier");
+//        identifier.toArray();
+//        System.out.println(parseIdentifier(identifier.get(0).toString()));
+//        
+//        Elements bodyContent = doc.getElementsByClass("body-content");
+//        String unformattedSynonyms = bodyContent.toString();
+//        
+//        int synonymStart = unformattedSynonyms.indexOf("Approximate Synonyms");
+//        
+//        //Start substring at "Approximate Synonym"
+//        unformattedSynonyms = unformattedSynonyms.substring(synonymStart);
+//        //Need second statement ensure </ul> is the one selected AFTER "Approximate Synonym" and not before
+//        unformattedSynonyms = unformattedSynonyms.substring((unformattedSynonyms.indexOf("<ul>") + 4 ), 
+//        		unformattedSynonyms.indexOf("</ul>"));
+//        
+//        //System.out.println("UNFORMATTED SYNONYMS ------------------------------");
+//        //System.out.println(unformattedSynonyms);
+//        
+//        ArrayList<String> formattedSynonyms = new ArrayList<String>();
+//        
+//        formattedSynonyms = parseSynonyms(unformattedSynonyms);
+//        
+//        //System.out.println(siteList.toString());
+//        System.out.println("Approximate Synonyms");
+//        
+//        for (int i = 0; i < formattedSynonyms.size(); i++) {
+//        	System.out.println(formattedSynonyms.get(i));
+//        }
         
     }
     
@@ -143,7 +145,6 @@ public class testCodes {
                 	//Can expand on this with different parsing
                 	ICDResults.add(link);
                 }
-                //test
             }     
         }
         
