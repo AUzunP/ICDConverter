@@ -24,9 +24,11 @@ public class testCodes {
     	
     	System.out.println("----------------------------------------------");
     	
-        Document doc = null;
-        
-        ArrayList<String> siteList = new ArrayList<String>();
+    	System.out.println(similarString("cat", "Kat"));
+    	
+//        Document doc = null;
+//        
+//        ArrayList<String> siteList = new ArrayList<String>();
         
         //manual addition of site for testing
         //siteList.add("https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z77-Z99/Z96-/Z96.651");
@@ -74,6 +76,18 @@ public class testCodes {
 //        }
         
     }
+    
+    public static int similarString(String stringA, String stringB) {
+		
+    	//Can come up with the proper "values" associated with matches later (i.e., how much impact should same amt of letters have? Same letters? Misplaced letters?)
+		//Can then come up with a percentage similar value and then let the user tune that to their liking
+		
+    	int similarityValue = 100;
+		
+		similarityValue -= Math.abs((stringA.length() - stringB.length()));
+		
+		return similarityValue;
+	}
     
     public static ArrayList<String> parseSynonyms(String synonyms) {
     	
