@@ -25,7 +25,7 @@ public class testCodes {
     	System.out.println("----------------------------------------------");
     	
     	System.out.println(similarString("cat", "Kat"));
-    	
+    	//{{
 //        Document doc = null;
 //        
 //        ArrayList<String> siteList = new ArrayList<String>();
@@ -74,7 +74,7 @@ public class testCodes {
 //        for (int i = 0; i < formattedSynonyms.size(); i++) {
 //        	System.out.println(formattedSynonyms.get(i));
 //        }
-        
+     //}}   
     }
     
     public static int similarString(String stringA, String stringB) {
@@ -84,7 +84,10 @@ public class testCodes {
 		
     	int similarityValue = 100;
 		
-		similarityValue -= Math.abs((stringA.length() - stringB.length()));
+    	int differenceInLength = Math.abs((stringA.length() - stringB.length()));
+    	System.out.println("Difference in lenght between two terms is " + differenceInLength);
+    	
+    	similarityValue -= differenceInLength;
 		
 		return similarityValue;
 	}
