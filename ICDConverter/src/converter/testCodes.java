@@ -24,7 +24,7 @@ public class testCodes {
     	
     	System.out.println("----------------------------------------------");
     	
-    	System.out.println(similarString("cat", "Kat"));
+    	System.out.println(similarString("hypertension", "hypertensiion"));
     	//{{
 //        Document doc = null;
 //        
@@ -81,13 +81,42 @@ public class testCodes {
 		
     	//Can come up with the proper "values" associated with matches later (i.e., how much impact should same amt of letters have? Same letters? Misplaced letters?)
 		//Can then come up with a percentage similar value and then let the user tune that to their liking
-		
+    	
+    	//Also check if the strings contain the same characters
+    	//I.e., hypertension and hypertensoin should return high similarity value
+    	
     	int similarityValue = 100;
 		
     	int differenceInLength = Math.abs((stringA.length() - stringB.length()));
     	System.out.println("Difference in lenght between two terms is " + differenceInLength);
     	
     	similarityValue -= differenceInLength;
+    	
+    	//If string lengths are not the same, assign the larger string to stringA
+    	
+    	if (stringA.length() != stringB.length()) {
+    		String tempString;
+    		
+    		if (stringB.length() > stringA.length()) {
+    			
+    			tempString = stringA;
+    			stringA = stringB;
+    			stringB = tempString;
+    			
+    		}
+    		
+    	}
+    	
+    	//Go through each string character by character and impose a penalty when two characters don't match
+    	//Should also try to switch characters around if two non-matching characters are found in a row
+    	for (int i = 0; i < stringB.length(); i++) {	
+    		
+    		if(stringA.charAt(i) != (stringB.charAt(i))) {
+    			System.out.println("Non-matching characters at location " + i);
+    			similarityValue--;
+    		}
+    		
+    	}
 		
 		return similarityValue;
 	}
