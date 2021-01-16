@@ -606,12 +606,31 @@ public class MainFrame extends JFrame {
 				String toSearch = editPane.searchBar.getText();
 				toSearch = toSearch.trim();
 				toSearch = toSearch.toUpperCase();
+				
+				// check if searching code or diagnosis
+				if (toSearch.equals("")) {
+					System.out.println("Empty search bar");
+					
+					if (editPane.searchButton.getText() == "SEARCH [DIAG]") {
+						editPane.searchButton.setText("SEARCH [CODE]");
+					} else {
+						editPane.searchButton.setText("SEARCH [DIAG]");
+					}
+					
+				}
+				
 				System.out.println("Search button clicked");
 
 				codeToAdd = null;
-
-				// check if diagnosis in search bar is associated with code
-				String returnedCode = mainDictionary.searchListDiagnosis(toSearch);
+				String returnedCode = "";
+				
+				// check if diagnosis or code in search bar is associated with code
+				if (editPane.searchButton.getText() == "SEARCH [DIAG]") {
+					returnedCode = mainDictionary.searchListDiagnosis(toSearch);
+					
+				} else if (editPane.searchButton.getText() == "SEARCH [CODE]"){
+					returnedCode = mainDictionary.searchListCode(toSearch);
+				}
 
 				// if so, change codeToAdd to that code
 				if (returnedCode != null) {
@@ -680,7 +699,7 @@ public class MainFrame extends JFrame {
 		if (!(mainDictionary.searchListCode(code) == null)) {
 			newCodeFrame.setEnabled(false);
 			errorBox.changeErrorText("Code already exists.");
-			// System.out.println(code);
+			//System.out.println(code);
 			errorBox.setVisible(true);
 			return false;
 		}

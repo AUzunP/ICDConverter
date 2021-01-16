@@ -25,6 +25,9 @@ public class testCodes {
     	System.out.println("----------------------------------------------");
     	
     	System.out.println(similarString("hypertension", "hypertensiion"));
+    	
+    	System.out.println(testDictionary.searchListCode("I10"));
+    	
     	//{{
 //        Document doc = null;
 //        

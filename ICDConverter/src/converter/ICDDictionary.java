@@ -62,14 +62,14 @@ public class ICDDictionary {
 		}
 	}
 	
-	public ArrayList<String> searchListCode(String codeToSearch) {
+	public String searchListCode(String codeToSearch) {
 		
 		codeToSearch = codeToSearch.toUpperCase();
 		
 		for (int i = 0; i < codesList.size(); i++) {
 			if (codesList.get(i).getCode().equals(codeToSearch)) {
 				//System.out.println("Code found");
-				return codesList.get(i).returnDiagnosis();
+				return codesList.get(i).getCode();
 			}
 		}
 		

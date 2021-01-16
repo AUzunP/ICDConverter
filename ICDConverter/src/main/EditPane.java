@@ -61,7 +61,7 @@ public class EditPane extends JPanel{
 		
 		//SEARCH BUTTON
 		d = new Dimension(100, 30);
-		searchButton = new CustomButton("SEARCH");
+		searchButton = new CustomButton("SEARCH [DIAG]");
 		searchButton.setPreferredSize(d);
 		searchButton.setMinimumSize(d);
 		searchButton.setMaximumSize(d);
