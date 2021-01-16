@@ -41,6 +41,7 @@ public class MainFrame extends JFrame {
 
 	private int width;
 	private int height;
+	private boolean autoAddInternetResult = true;
 
 	private JFrame newCodeFrame, dictionaryFrame, editFrame;
 
@@ -229,11 +230,14 @@ public class MainFrame extends JFrame {
 						System.out.println(formattedSynonyms.get(i));
 					}
 					
-					// Add symptom synonyms to diagnosis field
-					newCodePane.enterDiagnosis.setText(formattedSynonyms.get(0));
-					
-					// Add code to code field
-					newCodePane.enterCode.setText(returnedCode);
+					if (autoAddInternetResult) {
+						// Auto add only if user says to
+						// Add symptom synonyms to diagnosis field
+						newCodePane.enterDiagnosis.setText(formattedSynonyms.get(0));
+						
+						// Add code to code field
+						newCodePane.enterCode.setText(returnedCode);
+					}
 					
 					// }} 
 				} catch (Exception e1) {
