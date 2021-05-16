@@ -150,7 +150,7 @@ public class EditPane extends JPanel{
 	}
 
 	public class MiniPane extends JPanel{
-		//Class for the small 3 panels at the bottom
+		// Class for the small 3 panels at the bottom
 		private static final long serialVersionUID = 1L;
 		
 		public JLabel label;

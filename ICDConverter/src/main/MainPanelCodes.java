@@ -1,4 +1,5 @@
 package main;
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
@@ -29,10 +30,10 @@ public class MainPanelCodes extends JPanel{
 	
 	public void removeLabels() {
 		
-		this.removeAll();
+		removeAll();
 		//must always call re-validate and repaint after remove or remove all
-		this.revalidate();
-		this.repaint();
+		revalidate();
+		repaint();
 		
 		//reset the component gridY value
 		currY = 0;
@@ -55,8 +56,8 @@ public class MainPanelCodes extends JPanel{
 		codeInSearchBar.add(code);
 		
 		currY++;
-		this.revalidate();
-		this.repaint();
+		revalidate();
+		repaint();
 		
 	}
 	

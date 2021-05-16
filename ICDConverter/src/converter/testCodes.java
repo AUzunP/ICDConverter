@@ -166,8 +166,6 @@ public class testCodes {
     	
     	ArrayList<String> ICDResults = new ArrayList<String>();
     	
-    	//NOT MY CODE AFTER THIS POINT-----------------------------------------------------------------
-    	
     	//personal API key
     	String key="AIzaSyDkQQbwP33naYfFeWGmR1xlpDHic4LQN84";
         String qry="ICD+10+" + searchEntry;

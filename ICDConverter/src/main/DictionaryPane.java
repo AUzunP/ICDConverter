@@ -49,8 +49,8 @@ public class DictionaryPane extends JPanel{
 		//Populate dictionaryPaneCodeField
 		for (int i = 0; i < mainDictionary.codesList.size(); i++) {
 			
-//			dictionaryPaneCodeField.addCodeLabel(mainDictionary.codesList.get(i).getCode(), 
-//					mainDictionary.codesList.get(i).returnDiagnosis());
+		// dictionaryPaneCodeField.addCodeLabel(mainDictionary.codesList.get(i).getCode(), 
+		// mainDictionary.codesList.get(i).returnDiagnosis());
 			
 			dictionaryPaneCodeField.addCodeLabel(mainDictionary.codesList.get(i));
 			

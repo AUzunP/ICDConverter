@@ -35,11 +35,6 @@ public class TopPane extends JPanel{
 		textField = new JTextField();
 		add(textField, BorderLayout.CENTER);
 		
-		//UIManager.put("ScrollBar.thumb", new ColorUIResource(Color.WHITE));
-		//scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI());
-		
-		//this.add(scrollPane, BorderLayout.CENTER);
-		
 		enterButton = new CustomButton("Enter");
 		add(enterButton, BorderLayout.SOUTH);
 		

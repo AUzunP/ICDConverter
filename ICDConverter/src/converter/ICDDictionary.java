@@ -29,7 +29,7 @@ public class ICDDictionary {
 		//used to populate the list with codes and the associated diagnoses
 		
 		//THIS HAS TO BE CODES.TXT NOT CODES WHEN EXPORTING INTO .exe
-		//DO THE SAME FOR OTHER FILE WRITERSd
+		//DO THE SAME FOR OTHER FILE WRITERS
 		BufferedReader reader = new BufferedReader(new FileReader(codesFilePath));
 		
 		String textContents = "";

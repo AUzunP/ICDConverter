@@ -58,8 +58,8 @@ public class MainFrame extends JFrame {
 		setResizable(false);
 		setLayout(new BorderLayout());
 
-		this.width = 255;
-		this.height = 400;
+		width = 255;
+		height = 400;
 
 		// (x, y)
 		Dimension d = new Dimension(width, height);
@@ -71,7 +71,7 @@ public class MainFrame extends JFrame {
 		mainPane = new MainPane(width - 5, height - 5);
 		add(mainPane, BorderLayout.CENTER);
 
-		// {{Top pane enter button logic
+		// Top pane enter button logic
 
 		mainPane.topPane.enterButton.addActionListener(new ActionListener() {
 
@@ -94,9 +94,7 @@ public class MainFrame extends JFrame {
 
 		mainPane.topPane.textField.addActionListener(enterButtonKeyPress);
 
-		// }}
-
-		// {{Bottom pane clear button logic
+		// Bottom pane clear button logic
 
 		mainPane.bottomPane.clearButton.addActionListener(new ActionListener() {
 
@@ -106,9 +104,8 @@ public class MainFrame extends JFrame {
 			}
 
 		});
-		// }}
 
-		// {{Dictionary button logic
+		// Dictionary button logic
 		mainPane.settingsPane.dictionaryButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -117,9 +114,8 @@ public class MainFrame extends JFrame {
 			}
 
 		});
-		// }}
 
-		// {{Settings button logic
+		// Settings button logic
 		mainPane.settingsPane.settingsButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -127,9 +123,8 @@ public class MainFrame extends JFrame {
 			}
 
 		});
-		// }}
 
-		// {{Edit button logic
+		// Edit button logic
 		mainPane.settingsPane.editButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -138,7 +133,6 @@ public class MainFrame extends JFrame {
 			}
 
 		});
-		// }}
 
 		mainDictionary = new ICDDictionary();
 
@@ -160,27 +154,27 @@ public class MainFrame extends JFrame {
 		newCodeFrame.setUndecorated(true);
 		newCodeFrame.pack();
 		newCodeFrame.setLocationRelativeTo(mainPane);
-		
+
 		NonexistentCodePane newCodePane = new NonexistentCodePane(100, 200, errorTextString);
 
 		newCodeFrame.add(newCodePane, BorderLayout.CENTER);
 
-		// {{Internet Lookup button logic
+		// Internet Lookup button logic
 		newCodePane.internetLookupButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				
+
 				System.out.println("Internet Lookup button clicked");
-				
+
 				try {
-					
+
 					String enteredDiagnosis = mainPane.topPane.textField.getText();
 
 					Document doc = null;
 
 					ArrayList<String> siteList = new ArrayList<String>();
-					
-					// {{ AUTOMATIC ADDITION
+
+					// AUTOMATIC ADDITION
 
 					try {
 						siteList = searchGoogle(enteredDiagnosis);
@@ -201,7 +195,7 @@ public class MainFrame extends JFrame {
 					// identifier is the class in html file that contains the ICD code
 					Elements identifier = doc.getElementsByClass("identifier");
 					identifier.toArray();
-					
+
 					String returnedCode = parseIdentifier(identifier.get(0).toString());
 					System.out.println("Returned code: " + returnedCode);
 
@@ -212,7 +206,8 @@ public class MainFrame extends JFrame {
 
 					// Start substring at "Approximate Synonym"
 					unformattedSynonyms = unformattedSynonyms.substring(synonymStart);
-					// Need second statement ensure </ul> is the one selected AFTER "Approximate Synonym" and not before
+					// Need second statement ensure </ul> is the one selected AFTER "Approximate
+					// Synonym" and not before
 					unformattedSynonyms = unformattedSynonyms.substring((unformattedSynonyms.indexOf("<ul>") + 4),
 							unformattedSynonyms.indexOf("</ul>"));
 
@@ -229,17 +224,16 @@ public class MainFrame extends JFrame {
 					for (int i = 0; i < formattedSynonyms.size(); i++) {
 						System.out.println(formattedSynonyms.get(i));
 					}
-					
+
 					if (autoAddInternetResult) {
 						// Auto add only if user says to
 						// Add symptom synonyms to diagnosis field
 						newCodePane.enterDiagnosis.setText(formattedSynonyms.get(0));
-						
+
 						// Add code to code field
 						newCodePane.enterCode.setText(returnedCode);
 					}
-					
-					// }} 
+
 				} catch (Exception e1) {
 					System.out.println("Something went wrong during the internet search...");
 				}
@@ -247,9 +241,8 @@ public class MainFrame extends JFrame {
 			}
 
 		});
-		// }}
 
-		// {{Cancel button logic
+		// Cancel button logic
 		newCodePane.cancelButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -266,10 +259,9 @@ public class MainFrame extends JFrame {
 			}
 
 		});
-		// }}
 
 		// UNCOMMENT ADDITION PART
-		// {{Add to dictionary button logic
+		// Add to dictionary button logic
 		newCodePane.addToDictionaryButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -299,7 +291,6 @@ public class MainFrame extends JFrame {
 			}
 
 		});
-		// }}
 
 		// Action on window close
 		newCodeFrame.addWindowListener(new WindowAdapter() {
@@ -360,10 +351,7 @@ public class MainFrame extends JFrame {
 
 		ArrayList<String> ICDResults = new ArrayList<String>();
 
-		// NOT MY CODE AFTER THIS
-		// POINT-----------------------------------------------------------------
-
-		// personal API key
+		// personal API key (shouldn't be visible here but its a quick fix so...)
 		String key = "AIzaSyDkQQbwP33naYfFeWGmR1xlpDHic4LQN84";
 		String qry = "ICD+10+" + searchEntry;
 		URL url = new URL("https://www.googleapis.com/customsearch/v1?key=" + key
@@ -450,7 +438,7 @@ public class MainFrame extends JFrame {
 
 		editFrame.add(editPane, BorderLayout.CENTER);
 
-		// {{Button functions
+		// Button functions
 
 		// Remove diagnosis
 		editPane.removeDiagnosis.button.addActionListener(new ActionListener() {
@@ -606,29 +594,29 @@ public class MainFrame extends JFrame {
 				String toSearch = editPane.searchBar.getText();
 				toSearch = toSearch.trim();
 				toSearch = toSearch.toUpperCase();
-				
+
 				// check if searching code or diagnosis
 				if (toSearch.equals("")) {
 					System.out.println("Empty search bar");
-					
+
 					if (editPane.searchButton.getText() == "SEARCH [DIAG]") {
 						editPane.searchButton.setText("SEARCH [CODE]");
 					} else {
 						editPane.searchButton.setText("SEARCH [DIAG]");
 					}
-					
+
 				}
-				
+
 				System.out.println("Search button clicked");
 
 				codeToAdd = null;
 				String returnedCode = "";
-				
+
 				// check if diagnosis or code in search bar is associated with code
 				if (editPane.searchButton.getText() == "SEARCH [DIAG]") {
 					returnedCode = mainDictionary.searchListDiagnosis(toSearch);
-					
-				} else if (editPane.searchButton.getText() == "SEARCH [CODE]"){
+
+				} else if (editPane.searchButton.getText() == "SEARCH [CODE]") {
 					returnedCode = mainDictionary.searchListCode(toSearch);
 				}
 
@@ -648,8 +636,6 @@ public class MainFrame extends JFrame {
 			}
 
 		});
-
-		// }}
 
 		// Action on window close
 		editFrame.addWindowListener(new WindowAdapter() {
@@ -699,7 +685,7 @@ public class MainFrame extends JFrame {
 		if (!(mainDictionary.searchListCode(code) == null)) {
 			newCodeFrame.setEnabled(false);
 			errorBox.changeErrorText("Code already exists.");
-			//System.out.println(code);
+			// System.out.println(code);
 			errorBox.setVisible(true);
 			return false;
 		}
@@ -757,8 +743,8 @@ public class MainFrame extends JFrame {
 
 				System.out.println(mainDictionary.returnDiagnoses(returnedCode));
 
-//				mainPane.bottomPane.codeField.addCodeLabel(returnedCode, 
-//						mainDictionary.returnDiagnoses(returnedCode));
+			// mainPane.bottomPane.codeField.addCodeLabel(returnedCode, 
+			// mainDictionary.returnDiagnoses(returnedCode));
 				mainPane.bottomPane.codeField.addCodeLabel(mainDictionary.manipulate(returnedCode));
 
 			} else {

@@ -69,7 +69,7 @@ public class CodeLabel extends JPanel{
 		diagnosisScrollPane.setPreferredSize(d);
 		
 		setLayout(new BorderLayout());
-		this.setBorder(BorderFactory.createBevelBorder(1));
+		setBorder(BorderFactory.createBevelBorder(1));
 		
 		add(codeText, BorderLayout.CENTER);
 		add(diagnosisScrollPane, BorderLayout.EAST);
